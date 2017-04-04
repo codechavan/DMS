@@ -87,13 +87,13 @@ BEGIN
 				AND [DocuementObjectId] = @DocuementObjectId
 				AND [UserRoleId] = @UserRoleId
 			
-			SELECT @OutDocumentObjectUserRoleMappingId = 1, @ErrorDescription = 'User role removed successfully';
+			SELECT @OutDocumentObjectUserRoleMappingId = 1, @ErrorDescription = 'Document access removed successfully';
 		END
 
 		RETURN @OutDocumentObjectUserRoleMappingId;
 	END TRY
 	BEGIN CATCH
-		SELECT @OutDocumentObjectUserRoleMappingId = 0, @ErrorDescription = 'Error while creating document file';
+		SELECT @OutDocumentObjectUserRoleMappingId = 0, @ErrorDescription = 'Error while removing document access';
 		THROW;
 	END CATCH
 END

@@ -22,6 +22,8 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus CreateUpdateDocumentAccess(DocumentAccess paramValue);
 
+        public abstract FunctionReturnStatus RemoveDocumentAccess(DocumentAccess paramValue);
+
         public abstract DocumentAccess GetDocumentAccess(DocumentAccessSearchParameter searchParameters);
 
     }
