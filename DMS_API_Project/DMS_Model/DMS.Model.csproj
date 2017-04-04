@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7BAF446A-54D3-47FB-9CAD-9A47F65057A1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DMS.Model</RootNamespace>
+    <AssemblyName>DMS.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DmsSystemSearchData.cs" />
+    <Compile Include="DmsUserRoleSearchData.cs" />
+    <Compile Include="DmsUserSearchData.cs" />
+    <Compile Include="DocuementObjectType.cs" />
+    <Compile Include="DocumentAccessSearchParameter.cs" />
+    <Compile Include="DocumentAccess.cs" />
+    <Compile Include="DocumentFileHistory.cs" />
+    <Compile Include="DocumentPropertiesSearchParameter.cs" />
+    <Compile Include="DocumentProperties.cs" />
+    <Compile Include="DocumentFileSearchData.cs" />
+    <Compile Include="DocumentFilePropertiesNamesSearchParamater.cs" />
+    <Compile Include="DocumentFile.cs" />
+    <Compile Include="DocumentFolderSearchData.cs" />
+    <Compile Include="DocumentFileSearchParameter.cs" />
+    <Compile Include="DocumentFolderSearchParameter.cs" />
+    <Compile Include="DocumentFolder.cs" />
+    <Compile Include="DocumentPropertiesNames.cs" />
+    <Compile Include="SysConfigurationSearchData.cs" />
+    <Compile Include="SystemAdminSearchData.cs" />
+    <Compile Include="SystemAdminLoginIdentity.cs" />
+    <Compile Include="BasicAuthenticationIdentity.cs" />
+    <Compile Include="SystemAdmin.cs" />
+    <Compile Include="DmsUser.cs" />
+    <Compile Include="DmsUserRoleSearchParameter.cs" />
+    <Compile Include="DmsUserRole.cs" />
+    <Compile Include="DmsUserSearchParameter.cs" />
+    <Compile Include="Enum\StatusType.cs" />
+    <Compile Include="FunctionReturnStatus.cs" />
+    <Compile Include="DmsSystem.cs" />
+    <Compile Include="PagingDetails.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DmsSystemSearchParameters.cs" />
+    <Compile Include="ConfigurationSearchParameter.cs" />
+    <Compile Include="SystemAdminSearchParameter.cs" />
+    <Compile Include="SysConfiguration.cs" />
+    <Compile Include="SystemParameter.cs" />
+    <Compile Include="SystemParameterSearchParameters.cs" />
+    <Compile Include="SystemParameterValueSearchData.cs" />
+    <Compile Include="SystemParameterValue.cs" />
+    <Compile Include="UserLoginParameter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

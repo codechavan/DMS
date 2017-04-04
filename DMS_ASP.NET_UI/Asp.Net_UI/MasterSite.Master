@@ -1,0 +1,179 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterSite.master.cs" Inherits="DMS.UI.MasterSite" %>
+
+<!--<@ Import Namespace="System.Web.Optimization" %>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server">
+    <title>Navbar Template for Bootstrap</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sample page to include Bootstrap and Web API to Asp.Net forms application.">
+    <meta name="author" content="Sree">
+    <%-- Style Section --%>
+    <!--<: Styles.Render("~/bundles/BootstrapCss")  %>-->
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="StyleSection" runat="server" />
+    <link href="Content/Dashboard.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav id="navbar-white" class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button href="#menu-toggle" class="slidebar-toggle" id="menu-toggle">
+                    <%--<span class="sr-only">Toggle sidebar</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>--%>
+                    <i class="fa fa-folder-open" id="folderMenuIcon"></i>
+                </button>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span><a class="navbar-brand" href="/">Slidebar</a></span>
+            </div>
+
+            <div class="navbar-collapse collapse">
+
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i>Services <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/">Carwashes</a></li>
+                                <li><a href="/">Lapdances</a></li>
+                                <li><a href="/">Musicals</a></li>
+                                <li><a href="/">Tutorials</a></li>
+                                <li><a href="/">Catering</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags"></i>Products <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/">Books</a></li>
+                                <li><a href="/">Leaflets</a></li>
+                                <li><a href="/">CDs</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Merchandise</li>
+                                <li><a href="/">Towels</a></li>
+                                <li><a href="/">Flags</a></li>
+                                <li><a href="/">Coffee Mugs</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>Profile <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/"><i class="glyphicon glyphicon-user"></i>Profile</a></li>
+                                <li><a href="/"><i class="glyphicon glyphicon-plus"></i>Account</a></li>
+                                <li><a href="/"><i class="glyphicon glyphicon-cog"></i>Settings</a></li>
+                                <li><a href="/"><i class="glyphicon glyphicon-comment"></i>Notifications</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="slidebar-white" class="slidebar-nav">
+                <nav id="navbar-white1" class="navbar navbar-default" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li class="hidden-xs"><a class="navbar-brand" href="/">Slidebar</a></li>
+                        <li class="sidebar-form">
+                            <%--<form class="input-group" border="0" id="af" name="af" role="search" action="/archive.php">
+                                <input type="text" class="form-control" id="aa" name="aa" placeholder="Search">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-md" id="as" name="as" value="Go"><i class="glyphicon glyphicon-search"></i></button>
+                                </span>
+                            </form>--%>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i>Services <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/">Carwashes</a></li>
+                                <li><a href="/">Lapdances</a></li>
+                                <li><a href="/">Musicals</a></li>
+                                <li><a href="/">Tutorials</a></li>
+                                <li><a href="/">Catering</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags"></i>Products <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/">Books</a></li>
+                                <li><a href="/">Leaflets</a></li>
+                                <li><a href="/">CDs</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Merchandise</li>
+                                <li><a href="/">Towels</a></li>
+                                <li><a href="/">Flags</a></li>
+                                <li><a href="/">Coffee Mugs</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>Profile <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/"><i class="glyphicon glyphicon-user"></i>Profile</a></li>
+                                <li><a href="/"><i class="glyphicon glyphicon-plus"></i>Account</a></li>
+                                <li><a href="/"><i class="glyphicon glyphicon-cog"></i>Settings</a></li>
+                                <li><a href="/"><i class="glyphicon glyphicon-comment"></i>Notifications</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!--/.navbar -->
+            </div>
+            <!--/.sidebar-nav -->
+
+
+            <!-- Page Content -->
+            <main id="page-wrapper6">
+      <asp:ContentPlaceHolder ID="ContentSection" runat="server">
+                </asp:ContentPlaceHolder>
+    </main>
+        </div>
+        <!-- /#wrapper -->
+
+
+        <%-- Script Section --%>
+        <!--<: Scripts.Render("~/bundles/jQuery")  %>-->
+        <script src="Scripts/jquery-2.1.1.js"></script>
+        <script src="Scripts/bootstrap.js"></script>
+        <script>
+            // add to footer
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault(); $("#wrapper").toggleClass("toggled");
+                if (!$("#wrapper").hasClass("toggled")) {
+                    $('#folderMenuIcon').removeClass("fa-folder");
+                    $('#folderMenuIcon').addClass("fa-folder-open");
+                } else {
+                    $('#folderMenuIcon').addClass("fa-folder");
+                    $('#folderMenuIcon').removeClass("fa-folder-open");
+                }
+            });
+            
+        </script>
+
+        <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
+    </form>
+</body>
+</html>

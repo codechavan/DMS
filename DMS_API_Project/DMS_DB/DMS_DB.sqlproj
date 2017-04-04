@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DMS_DB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{4717ecab-e02f-48a9-9913-b396b5f393f9}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DMS_DB</RootNamespace>
+    <AssemblyName>DMS_DB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="FileGroups" />
+    <Folder Include="Default Data" />
+    <Folder Include="Functions" />
+    <Folder Include="Functions\Scaller Functions" />
+    <Folder Include="Functions\Table Value Functions" />
+    <Folder Include="StoreProcedures" />
+    <Folder Include="Views" />
+    <Folder Include="Tables\Document" />
+    <Folder Include="Indexes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Functions\Scaller Functions\dbo.ufn_GetSystemParameterValue.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_System.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_Userrole.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_User.sql" />
+    <Build Include="Functions\Scaller Functions\dbo.ufn_GetConfigurationValue.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Update_System.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_Userroles.sql" />
+    <Build Include="Views\dbo.vw_UserRoles.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Update_UserPassword.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Update_UserUnlock.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_UserLogin.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_Systems.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_Users.sql" />
+    <Build Include="Views\dbo.vw_Users.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_SystemParameter.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_SystemParameterValues.sql" />
+    <Build Include="Views\dbo.vw_SystemParameterValues.sql" />
+    <Build Include="Tables\dbo.Configurations.sql" />
+    <Build Include="Tables\Document\dbo.DocumentFileData.sql" />
+    <Build Include="Indexes\dbo.IX_DocumentFileData_DocumentFileID_IsActive.sql" />
+    <Build Include="Tables\Document\dbo.DocumentFiles.sql" />
+    <Build Include="Tables\Document\dbo.DocumentFolders.sql" />
+    <Build Include="Indexes\dbo.IX_DocumentFiles_SystemId_DocumentFolderId_DocumentFileId.sql" />
+    <Build Include="Indexes\dbo.IX_DocumentFolders_SystemId_DocumentFolderId.sql" />
+    <Build Include="Tables\Document\dbo.DocumentFileProperties.sql" />
+    <Build Include="Tables\Document\dbo.DocumentObjectUserRoleMappings.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Update_Configuration.sql" />
+    <Build Include="Tables\Document\dbo.DocumentFilePropertiesNames.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_Configurations.sql" />
+    <Build Include="Views\dbo.vw_Configurations.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_DocumentPropertiesName.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_DocumentPropertiesName.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_DocumentFolder.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_DocumentFolders.sql" />
+    <Build Include="Views\dbo.vw_DocumentFolders.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_DocumentFile.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_DocumentFiles.sql" />
+    <Build Include="Views\dbo.vw_DocumentFiles.sql" />
+    <Build Include="Views\dbo.vw_DocumentFileHistory.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_DocumentFileHistory.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_DocumentFileProperties.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_DocumentFileProperties.sql" />
+    <Build Include="Views\dbo.vw_DocumentFileProperties.sql" />
+    <Build Include="Views\dbo.vw_DocumentFilePropertiesNames.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_DocumentAccess.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Remove_DocumentAccess.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_DocumentAccess.sql" />
+    <Build Include="Functions\Scaller Functions\dbo.ufn_DecryptText.sql" />
+    <Build Include="Functions\Scaller Functions\dbo.ufn_EncryptText.sql" />
+    <Build Include="Functions\Scaller Functions\dbo.ufn_GenerateLogonToken.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_LogonDetail.sql" />
+    <Build Include="Functions\Table Value Functions\dbo.ufn_Split.sql" />
+    <Build Include="Functions\Scaller Functions\dbo.ufn_AuthenticateUser.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_SystemParameters.sql" />
+    <Build Include="Tables\dbo.SystemAdmins.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Create_Update_SystemAdmin.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Update_SystemAdminPassword.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_SystemAdminLogonDetail.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_SystemAdminLogin.sql" />
+    <Build Include="Functions\Scaller Functions\dbo.ufn_GenerateSystemAdminLogonToken.sql" />
+    <Build Include="Functions\Scaller Functions\dbo.ufn_AuthenticateSystemAdmin.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_SystemAdmins.sql" />
+    <None Include="Default Data\dbo.SystemAdmins.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_Documents.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FileGroups\FileGroup.DocumentDataFiles.sql" />
+    <None Include="Default Data\dbo.SystemParameters.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DMS_DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Script1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Default Data\dbo.Configurations.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\110\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\110\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\dbo.SystemParameters.sql" />
+    <Build Include="Tables\dbo.SystemParameterValues.sql" />
+    <Build Include="Tables\dbo.Systems.sql" />
+    <Build Include="Tables\dbo.UserRoles.sql" />
+    <Build Include="Tables\dbo.Users.sql" />
+  </ItemGroup>
+</Project>

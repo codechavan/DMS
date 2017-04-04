@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DMS_DB", "DMS_DB\DMS_DB.sqlproj", "{4717ECAB-E02F-48A9-9913-B396B5F393F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.Repository", "DMSRepository\DMS.Repository.csproj", "{5743F236-1AEB-47C1-92CD-7A9465AE0F52}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4717ECAB-E02F-48A9-9913-B396B5F393F9} = {4717ECAB-E02F-48A9-9913-B396B5F393F9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.Model", "DMS_Model\DMS.Model.csproj", "{7BAF446A-54D3-47FB-9CAD-9A47F65057A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.DatabaseConstants", "DMS.DatabaseConstants\DMS.DatabaseConstants.csproj", "{6B7F874E-6910-440A-BF48-8C028DFDC83E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.BL", "DMS.BL\DMS.BL.csproj", "{1FDE0F05-A6AE-411D-87AF-358691770B94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.API", "DMS.API\DMS.API.csproj", "{78F98889-A50C-4107-A752-7AF30D0BBBB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4717ECAB-E02F-48A9-9913-B396B5F393F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4717ECAB-E02F-48A9-9913-B396B5F393F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4717ECAB-E02F-48A9-9913-B396B5F393F9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4717ECAB-E02F-48A9-9913-B396B5F393F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4717ECAB-E02F-48A9-9913-B396B5F393F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4717ECAB-E02F-48A9-9913-B396B5F393F9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5743F236-1AEB-47C1-92CD-7A9465AE0F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5743F236-1AEB-47C1-92CD-7A9465AE0F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5743F236-1AEB-47C1-92CD-7A9465AE0F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5743F236-1AEB-47C1-92CD-7A9465AE0F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BAF446A-54D3-47FB-9CAD-9A47F65057A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BAF446A-54D3-47FB-9CAD-9A47F65057A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BAF446A-54D3-47FB-9CAD-9A47F65057A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BAF446A-54D3-47FB-9CAD-9A47F65057A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B7F874E-6910-440A-BF48-8C028DFDC83E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B7F874E-6910-440A-BF48-8C028DFDC83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B7F874E-6910-440A-BF48-8C028DFDC83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B7F874E-6910-440A-BF48-8C028DFDC83E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FDE0F05-A6AE-411D-87AF-358691770B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FDE0F05-A6AE-411D-87AF-358691770B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FDE0F05-A6AE-411D-87AF-358691770B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FDE0F05-A6AE-411D-87AF-358691770B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78F98889-A50C-4107-A752-7AF30D0BBBB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78F98889-A50C-4107-A752-7AF30D0BBBB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78F98889-A50C-4107-A752-7AF30D0BBBB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78F98889-A50C-4107-A752-7AF30D0BBBB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,132 @@
+﻿<div class="modal-dialog" ng-app="LoginApp" ng-controller="LoginController">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="well">
+                        <form method="POST" name="form" novalidate="novalidate" role="form" ng-submit="submitForm()">
+                            <div class="form-group">
+                                <label class="control-label">Username</label>
+                                <input type="text" class="form-control"
+                                       name="UserName" required ng-minlength="5" ng-maxlength="50"
+                                       ng-model="UserModel.UserName"
+                                       ng-class="Submited?'ng-dirty':''"
+                                       title="Please enter you username">
+                                <span class="help-block" ng-show="(form.UserName.$dirty || Submited ) && form.UserName.$error.required">Please enter username</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">Password</label>
+                                <input type="password" name="Password" class="form-control" ng-minlength="5"
+                                       ng-maxlength="50" ng-model="UserModel.Password"
+                                       ng-class="Submited?'ng-dirty':''"
+                                       title="Please enter your password" required>
+                                <span class="help-block" ng-show="(form.Password.$dirty || Submited ) && form.Password.$error.required">Please enter Password</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">System</label>
+
+                                <select name="repeatSelect" class="form-control" ng-model="UserModel.SystemID">
+                                    <option ng-repeat="option in Systems" value="{{option.SystemID}}">{{option.SystemName}}</option>
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                            <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="remember" id="remember"> Remember login
+                                </label>
+                                <p class="help-block">(if this is a private computer)</p>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block" ng-disabled="form.$invalid">Login</button>
+                            <a href="/forgot/" class="btn btn-default btn-block">Help to login</a>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                    <ul class="list-unstyled" style="line-height: 2">
+                        <li><span class="fa fa-check text-success"></span> See all your orders</li>
+                        <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+                        <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+                        <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+                        <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+                        <li><a href="/read-more/"><u>Read more</u></a></li>
+                    </ul>
+                    <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var SystemDropDownAPI = '@WebConstants.SystemDropDownAPI';
+    var logon_url = '@WebConstants.SubmitLogonMethod';
+    var DMSAPIURL = '@WebConstants.DMSAPIURL';
+    var header = '@WebConstants.HeaderLogin';
+
+    var authInfo = @RequestHelper.GetAutheticationInfo();
+
+    (function () {
+        LoginApp = angular.module('LoginApp', ['ui.router', 'ngDialog', 'ui.bootstrap']);
+
+        ConfigureSessionInjector(authInfo, 'LoginApp');
+
+        //MutualFundSecurityApp.factory('MutualFundSecurityAppService', [MutualFundSecurityAppService]);
+
+        LoginApp.factory('DialogueService', ['ngDialog', '$rootScope', '$compile', DialogueService]);
+
+        LoginApp.factory('UIBlocker', [UIBlocker]);
+
+        controller = LoginApp.controller('LoginController', ['$scope', '$rootScope', '$state', '$http', 'ngDialog', 'UIBlocker', 'DialogueService', LoginControllerMethod]);
+
+        function LoginControllerMethod($scope, $rootScope, $state, $http, ngDialog, UIBlocker, DialogueService) {
+
+            UIBlocker.block();
+
+            $scope.UserModel = {};
+            $scope.Systems = [];
+
+            $scope.submitForm = function () {
+
+                UIBlocker.block();
+                $http({
+                    method: 'POST',
+                    url: logon_url,
+                    data: $scope.UserModel
+                }).then(function successCallback(response) {
+                    DialogueService.showAlert(header, response.data.Message);
+                    UIBlocker.unblock();
+                    if (response.data.StatusType == 1) {
+
+                    }
+                }, function errorCallback(response) {
+                    DialogueService.showAlert(header, response.ExceptionMessage);
+                    UIBlocker.unblock();
+                });
+
+            }
+
+            UIBlocker.block();
+            $http({
+                method: 'GET',
+                url: DMSAPIURL + SystemDropDownAPI
+            }).then(function successCallback(response, status, headers, config) {
+                $scope.Systems = response.data;
+                UIBlocker.unblock();
+            }, function errorCallback(response, status, headers, config) {
+                DialogueService.showAlert(header, response.ExceptionMessage);
+                UIBlocker.unblock();
+            });
+
+        }
+
+        //    LoginApp.config(function ($locationProvider) {
+        //        $locationProvider.html5Mode(true);
+        //    });
+    })();
+</script>
