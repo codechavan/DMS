@@ -21,36 +21,55 @@ namespace DMS.DatabaseConstants
                 public const string strOrderBy = "@strOrderBy";
             }
 
+            #region Document Access
+
             public const string usp_Get_DocumentAccess = "[dbo].[usp_Get_DocumentAccess]";
             public class usp_Get_DocumentAccess_Parameters
             {
-                public const string @SystemId = "@SystemId";
-                public const string @DocuementObjectType = "@DocuementObjectType";
-                public const string @DocuementObjectId = "@DocuementObjectId";
-                public const string @DocumentAccessForUserId = "@DocumentAccessForUserId";
-                public const string @CanRead = "@CanRead";
-                public const string @CanWrite = "@CanWrite";
-                public const string @CanDelete = "@CanDelete";
-                public const string @IsInhereted = "@IsInhereted";
-                public const string @InheretedFolderId = "@InheretedFolderId";
-                public const string @InheretedFolderName = "@InheretedFolderName";
-                public const string @OutDocumentObjectUserRoleMappingId = "@OutDocumentObjectUserRoleMappingId";
-                public const string @ErrorDescription = "@ErrorDescription";
+                public const string SystemId = "@SystemId";
+                public const string ObjectType = "@DocuementObjectType";
+                public const string ObjectId = "@DocuementObjectId";
+                public const string ForUserId = "@DocumentAccessForUserId";
+                public const string CanRead = "@CanRead";
+                public const string CanWrite = "@CanWrite";
+                public const string CanDelete = "@CanDelete";
+                public const string IsInhereted = "@IsInhereted";
+                public const string InheretedFolderId = "@InheretedFolderId";
+                public const string InheretedFolderName = "@InheretedFolderName";
+                public const string OutDocumentObjectUserRoleMappingId = "@OutDocumentObjectUserRoleMappingId";
+                public const string ErrorDescription = "@ErrorDescription";
             }
 
             public const string usp_Remove_DocumentAccess = "[dbo].[usp_Remove_DocumentAccess]";
             public class usp_Remove_DocumentAccess_Parameters
             {
                 public const string SystemId = "@SystemId";
-                public const string DocuementObjectType = "@DocuementObjectType";
-                public const string DocuementObjectId = "@DocuementObjectId";
+                public const string ObjectType = "@DocuementObjectType";
+                public const string ObjectId = "@DocuementObjectId";
                 public const string UserRoleId = "@UserRoleId";
-                public const string DocumentObjectUserRoleMappingDeletedBy = "@DocumentObjectUserRoleMappingDeletedBy";
+                public const string DeletedBy = "@DocumentObjectUserRoleMappingDeletedBy";
                 public const string OutDocumentObjectUserRoleMappingId = "@OutDocumentObjectUserRoleMappingId";
                 public const string ErrorDescription = "@ErrorDescription";
 
             }
-            
+
+            public const string usp_Create_Update_DocumentAccess = "[dbo].[usp_Create_Update_DocumentAccess]";
+            public class usp_Create_Update_DocumentAccess_Parameters
+            {
+                public const string SystemId = "@SystemId";
+                public const string ObjectType = "@DocuementObjectType";
+                public const string ObjectId = "@DocuementObjectId";
+                public const string UserRoleId = "@UserRoleId";
+                public const string CanRead = "@CanRead";
+                public const string CanWrite = "@CanWrite";
+                public const string CanDelete = "@CanDelete";
+                public const string CreatedBy = "@DocumentObjectUserRoleMappingCreatedBy";
+                public const string OutDocumentObjectUserRoleMappingId = "@OutDocumentObjectUserRoleMappingId";
+                public const string ErrorDescription = "@ErrorDescription";
+            }
+
+            #endregion
+
             #region DMS Systems
 
             public const string usp_create_system = "[dbo].[usp_create_system]";

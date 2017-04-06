@@ -7,7 +7,7 @@
 	@CanRead								BIT OUT,
 	@CanWrite								BIT OUT,
 	@CanDelete								BIT OUT,
-	@IsInhereted							INT OUT,
+	@IsInhereted							BIT OUT,
 	@InheretedFolderId						NUMERIC OUT,
 	@InheretedFolderName					NVARCHAR(250) OUT,
 	@OutDocumentObjectUserRoleMappingId		NUMERIC OUT,
@@ -162,6 +162,6 @@ BEGIN
 			
 		END
 
-		SELECT @CanRead = 0, @CanWrite = 0, @CanDelete = 0, @IsInhereted= -1, @OutDocumentObjectUserRoleMappingId = 1, @ErrorDescription = '';
+		SELECT @CanRead = 0, @CanWrite = 0, @CanDelete = 0, @IsInhereted= 0, @OutDocumentObjectUserRoleMappingId = 1, @ErrorDescription = '';
 		RETURN @OutDocumentObjectUserRoleMappingId;
 END

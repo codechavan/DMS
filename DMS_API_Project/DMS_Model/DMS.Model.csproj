@@ -43,6 +43,7 @@
     <Compile Include="DmsUserRoleSearchData.cs" />
     <Compile Include="DmsUserSearchData.cs" />
     <Compile Include="DocuementObjectType.cs" />
+    <Compile Include="DocumentAccessDetail.cs" />
     <Compile Include="DocumentAccessSearchParameter.cs" />
     <Compile Include="DocumentAccess.cs" />
     <Compile Include="DocumentFileHistory.cs" />
