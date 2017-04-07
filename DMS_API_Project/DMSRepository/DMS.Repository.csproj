@@ -64,13 +64,11 @@
     <Compile Include="DAL\SystemAdminDAL.cs" />
     <Compile Include="DAL\UsersDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQL\DocumentAccessSQL.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="SQL\DocumentAccessSQL.cs" />
     <Compile Include="SQL\DocumentFileSQL.cs" />
     <Compile Include="SQL\DocumentFolderSQL.cs" />
-    <Compile Include="SQL\DocumentPropertiesSQL.cs" />
     <Compile Include="SQL\DocumentPropertiesNamesSQL.cs" />
+    <Compile Include="SQL\DocumentPropertiesSQL.cs" />
     <Compile Include="SQL\SQLScallerFunctions.cs" />
     <Compile Include="SQL\ConfigurationSQL.cs" />
     <Compile Include="SQL\SystemParameterSQL.cs" />
