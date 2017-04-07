@@ -48,7 +48,7 @@ BEGIN
 			SELECT @SystemParameterValueId = -7, @ErrorDescription = 'User not found in system for parameter value update';
 			RETURN;
 		END
-		IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @SystemParameterValueCreatedBy AND SystemId = @SystemId)
+		IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @SystemParameterValueCreatedBy AND COALESCE([SystemId], 0) = @SystemId)
 		BEGIN
 			SELECT @SystemParameterValueId = -8, @ErrorDescription = 'Invalid user, this user not belongs to selected system';
 			RETURN;

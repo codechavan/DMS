@@ -9,9 +9,9 @@ AS
 BEGIN
 	IF EXISTS (SELECT 1
 				FROM [dbo].[Users]
-				WHERE [SystemId] = @SystemId 
+				WHERE COALESCE([SystemId], 0) = @SystemId 
 					AND [UserName] = @UserName
-					AND [dbo].[ufn_DecryptText](UserPassword) = @Password
+					AND COALESCE([dbo].[ufn_DecryptText](UserPassword), '') = @Password
 					AND [UserIsActive] = 1
 					AND [UserIsLock] = 0)
 	BEGIN

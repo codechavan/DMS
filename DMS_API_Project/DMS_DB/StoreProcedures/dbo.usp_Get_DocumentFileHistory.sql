@@ -5,7 +5,23 @@
 AS
 BEGIN
 
-	SELECT *
+	SELECT  [DocumentFileDataId],
+		[DocumentFileId],
+		[DocumentFileName],
+		[DocumentFolderId],
+		[DocumentFolderName],
+		[SystemId],
+		[DocumentFileIsDeleted],
+		[DocumentFileCreatedBy],
+		[DocumentFileCreatedOn],
+		[DocumentFileCreatedByUserName],
+		[DocumentFileCreatedByUserFullName],
+		[DocumentFileModifiedBy],
+		[DocumentFileModifiedOn],
+		[DocumentFileModifiedByUserName],
+		[DocumentFileModifiedByUserFullName],
+		[FileUploadedByUserName],
+		[FileUploadedByUserFullName]
 	FROM [dbo].[vw_DocumentFileHistory]
 	WHERE [DocumentFileId] = @DocumentFileId
 

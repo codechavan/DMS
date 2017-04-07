@@ -41,7 +41,7 @@ BEGIN
 				SELECT @OutDocumentObjectUserRoleMappingId = -5, @ErrorDescription = 'Dms System not available with specified system id';
 				RETURN @OutDocumentObjectUserRoleMappingId;
 			END
-			IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @DocumentObjectUserRoleMappingCreatedBy AND [SystemId] = @SystemId)
+			IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @DocumentObjectUserRoleMappingCreatedBy AND COALESCE([SystemId], 0) = @SystemId)
 			BEGIN
 				SELECT @OutDocumentObjectUserRoleMappingId = -6, @ErrorDescription = 'Login user not found in system';
 				RETURN @OutDocumentObjectUserRoleMappingId;

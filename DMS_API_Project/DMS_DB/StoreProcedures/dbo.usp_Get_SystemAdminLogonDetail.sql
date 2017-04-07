@@ -21,7 +21,7 @@ BEGIN
 		CREATE TABLE #LogonDetails
 		(
 			RowId	NUMERIC,
-			Data	NVARCHAR(300)
+			Data	NVARCHAR(8000)
 		)
 	END
 

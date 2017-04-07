@@ -35,7 +35,19 @@ BEGIN
 		END
 	END
 
-	SELECT * 
+	SELECT 
+	[AdminId],
+	[UserName],
+	[Password],
+	[FullName],
+	[EmailId],
+	[LastLogin], 
+	[LastPasswordChangedOn],
+	[LastPasswordChangedBy],
+	[CreatedBy], 
+	[CreatedOn],
+	[ModifiedBy],
+	[ModifiedOn]
 	FROM [dbo].[SystemAdmins] 
 	WHERE [UserName] = @UserName 
 		AND [dbo].[ufn_DecryptText]([Password]) = @Password

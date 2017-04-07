@@ -28,7 +28,7 @@ namespace DMS.Repository.DAL
         public abstract List<DocumentFileHistory> GetFileHistory(long documentId);
 
 
-        protected string GetDocumentFolderParameterString(DocumentFileSearchParameter searchParameters)
+        protected string GetDocumentFileParameterString(DocumentFileSearchParameter searchParameters)
         {
             List<string> lstConditions = new List<string>();
 
@@ -62,7 +62,7 @@ namespace DMS.Repository.DAL
             return string.Join(" AND ", lstConditions);
         }
 
-        protected string GetDocumentFolderOrderBy(string OrderByString)
+        protected string GetDocumentFileOrderBy(string OrderByString)
         {
             List<string> lstColumns = new List<string>();
             string columnName, orderBy;
@@ -131,7 +131,7 @@ namespace DMS.Repository.DAL
             return string.Join(", ", lstColumns);
         }
 
-        protected List<DocumentFile> CreateDocumentFolderObject(IDataReader objReader)
+        protected List<DocumentFile> CreateDocumentFileObject(IDataReader objReader)
         {
             List<DocumentFile> lstFiles = new List<DocumentFile>();
             DocumentFile file;
@@ -160,6 +160,43 @@ namespace DMS.Repository.DAL
                 if (objReader[Views.vw_DocumentFiles.ModifiedOn] != DBNull.Value)
                 {
                     file.ModifiedOn = Convert.ToDateTime(objReader[Views.vw_DocumentFiles.ModifiedOn]);
+                }
+                lstFiles.Add(file);
+            }
+
+            if (isnull) { return null; }
+            else { return lstFiles; }
+        }
+
+        protected List<DocumentFileHistory> CreateDocumentFileHistoryObject(IDataReader objReader)
+        {
+            List<DocumentFileHistory> lstFiles = new List<DocumentFileHistory>();
+            DocumentFileHistory file;
+            bool isnull = true;
+
+            while (objReader.Read())
+            {
+                isnull = false;
+                file = new DocumentFileHistory();
+                file.FileId = objReader[Views.vw_DocumentFileHistory.FileId] != DBNull.Value ? Convert.ToInt64(objReader[Views.vw_DocumentFileHistory.FileId]) : 0;
+                file.FolderId = objReader[Views.vw_DocumentFileHistory.FolderId] != DBNull.Value ? Convert.ToInt64(objReader[Views.vw_DocumentFileHistory.FolderId]) : 0;
+                file.SystemId = objReader[Views.vw_DocumentFileHistory.SystemId] != DBNull.Value ? Convert.ToInt64(objReader[Views.vw_DocumentFileHistory.SystemId]) : 0;
+                file.FileName = objReader[Views.vw_DocumentFileHistory.FileName] != DBNull.Value ? Convert.ToString(objReader[Views.vw_DocumentFileHistory.FileName]) : null;
+                file.FolderName = objReader[Views.vw_DocumentFileHistory.FolderName] != DBNull.Value ? Convert.ToString(objReader[Views.vw_DocumentFileHistory.FolderName]) : null;
+                file.IsDeleted = objReader[Views.vw_DocumentFileHistory.IsDeleted] != DBNull.Value ? Convert.ToBoolean(objReader[Views.vw_DocumentFileHistory.IsDeleted]) : false;
+
+                file.CreatedByUserName = objReader[Views.vw_DocumentFileHistory.CreatedByUserName] != DBNull.Value ? Convert.ToString(objReader[Views.vw_DocumentFileHistory.ModifiedByUserName]) : null;
+                file.CreatedByUserFullName = objReader[Views.vw_DocumentFileHistory.CreatedByUserFullName] != DBNull.Value ? Convert.ToString(objReader[Views.vw_DocumentFileHistory.ModifiedByUserFullName]) : null;
+                file.CreatedBy = objReader[Views.vw_DocumentFileHistory.CreatedBy] != DBNull.Value ? Convert.ToInt64(objReader[Views.vw_DocumentFileHistory.CreatedBy]) : 0;
+                file.CreatedOn = objReader[Views.vw_DocumentFileHistory.CreatedOn] != DBNull.Value ? Convert.ToDateTime(objReader[Views.vw_DocumentFileHistory.CreatedOn]) : DateTime.Now;
+
+                file.ModifiedByUserName = objReader[Views.vw_DocumentFileHistory.ModifiedByUserName] != DBNull.Value ? Convert.ToString(objReader[Views.vw_DocumentFileHistory.ModifiedByUserName]) : null;
+                file.ModifiedByUserFullName = objReader[Views.vw_DocumentFileHistory.ModifiedByUserFullName] != DBNull.Value ? Convert.ToString(objReader[Views.vw_DocumentFileHistory.ModifiedByUserFullName]) : null;
+                file.ModifiedBy = objReader[Views.vw_DocumentFileHistory.ModifiedBy] != DBNull.Value ? Convert.ToInt64(objReader[Views.vw_DocumentFileHistory.ModifiedBy]) : 0;
+                file.ModifiedOn = null;
+                if (objReader[Views.vw_DocumentFileHistory.ModifiedOn] != DBNull.Value)
+                {
+                    file.ModifiedOn = Convert.ToDateTime(objReader[Views.vw_DocumentFileHistory.ModifiedOn]);
                 }
                 lstFiles.Add(file);
             }

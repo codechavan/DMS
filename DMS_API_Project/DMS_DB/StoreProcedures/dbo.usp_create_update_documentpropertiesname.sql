@@ -56,7 +56,10 @@ BEGIN
 			DocumentFilePropertiesNameModifiedOn = GETDATE()
 			WHERE 
 			[SystemId] = @SystemId
-	END ELSE
+			
+			SELECT @ErrorCode = 1, @ErrorDescription = 'Document properties configuration saved successfully';
+	END 
+	ELSE
 	BEGIN
 		INSERT INTO [dbo].[DocumentFilePropertiesNames] 
 			(
@@ -88,6 +91,8 @@ BEGIN
 				@Field10Name,
 				@CreatedBy
 			)
+		
+		SELECT @ErrorCode = 1, @ErrorDescription = 'Document properties configuration saved successfully';
 	END
 END
 

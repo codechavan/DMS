@@ -10,7 +10,7 @@ RETURNS @temptable TABLE
 AS
 BEGIN
 	DECLARE @idx INT     
-	DECLARE @slice VARCHAR(8000)     
+	DECLARE @slice VARCHAR(MAX)     
     
 	SELECT @idx = 1     
 		IF LEN(@String)<1 OR @String IS NULL  RETURN 

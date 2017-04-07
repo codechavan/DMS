@@ -269,7 +269,6 @@ namespace DMS.BL
         }
 
 
-
         public void Dispose()
         {
             logger = null;

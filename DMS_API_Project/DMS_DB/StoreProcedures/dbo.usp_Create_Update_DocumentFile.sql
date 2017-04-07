@@ -40,7 +40,7 @@ BEGIN
 				SELECT @OutDocumentFileId = -5, @ErrorDescription = 'Dms System not available with specified system id';
 				RETURN;
 			END
-			IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @DocumentFileCreatedBy AND [SystemId] = @SystemId)
+			IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @DocumentFileCreatedBy AND COALESCE([SystemId], 0) = @SystemId)
 			BEGIN
 				SELECT @OutDocumentFileId = -6, @ErrorDescription = 'Login user not found in system';
 				RETURN;

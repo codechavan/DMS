@@ -9,7 +9,7 @@ namespace DMS.Model
     public class DocumentFileSearchData
     {
         public long RecordCount { get; set; }
-        public PagingDetails PagingDetail { get; set; }
+        public PagingDetails PageDetail { get; set; }
         public IList<DocumentFile> LstData { get; set; }
     }
 }

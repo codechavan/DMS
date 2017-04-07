@@ -56,7 +56,7 @@ BEGIN
 				RETURN;
 			END
 			
-			IF EXISTS(SELECT 1 FROM [dbo].[Users] WHERE SystemId = @SystemId AND UserName = @UserName AND (COALESCE(@UserId, 0) = 0 OR COALESCE(@UserId, 0) <> [UserId]))
+			IF EXISTS(SELECT 1 FROM [dbo].[Users] WHERE COALESCE([SystemId], 0) = @SystemId AND UserName = @UserName AND (COALESCE(@UserId, 0) = 0 OR COALESCE(@UserId, 0) <> [UserId]))
 			BEGIN
 				SELECT @OutUserId = -1, @ErrorDescription = 'User already exists with similar username in system';
 				RETURN;
@@ -111,7 +111,7 @@ BEGIN
 				UserModifiedBy = @UserCreatedBy,
 				UserModifiedOn = GETDATE()
 			WHERE UserId = @UserId
-				AND SystemId = @SystemId
+				AND COALESCE([SystemId], 0) = @SystemId
 			
 			SELECT @OutUserId = @UserId, @ErrorDescription = 'User updated successfully';
 		END

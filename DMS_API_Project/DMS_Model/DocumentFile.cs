@@ -12,6 +12,7 @@ namespace DMS.Model
         public long FolderId { get; set; }
         public long SystemId { get; set; }
         public string FileName { get; set; }
+        public byte[] FileData { get; set; }
         public string FolderName { get; set; }
         public bool IsDeleted { get; set; }
         public long CreatedBy { get; set; }

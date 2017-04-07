@@ -8,8 +8,8 @@
 	@CanWrite								BIT OUT,
 	@CanDelete								BIT OUT,
 	@IsInhereted							BIT OUT,
-	@InheretedFolderId						NUMERIC OUT,
-	@InheretedFolderName					NVARCHAR(250) OUT,
+	@InheretedFolderId						NUMERIC = 0 OUT,
+	@InheretedFolderName					NVARCHAR(250) = NULL OUT,
 	@OutDocumentObjectUserRoleMappingId		NUMERIC OUT,
 	@ErrorDescription						NVARCHAR(500) OUT 
 )
@@ -50,7 +50,7 @@ BEGIN
 
 		END
 		
-		SELECT @UserRoleId = UserRoleId FROM Users WHERE [UserId] = @DocumentAccessForUserId AND [SystemId] = @SystemId
+		SELECT @UserRoleId = UserRoleId FROM Users WHERE [UserId] = @DocumentAccessForUserId AND COALESCE([SystemId], 0) = @SystemId
 
 		BEGIN
 			
@@ -66,7 +66,7 @@ BEGIN
 				RETURN @OutDocumentObjectUserRoleMappingId;
 			END
 
-			IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @DocumentAccessForUserId AND [SystemId] = @SystemId)
+			IF NOT EXISTS(SELECT 1 FROM [dbo].[Users] WHERE UserId = @DocumentAccessForUserId AND COALESCE([SystemId], 0) = @SystemId)
 			BEGIN
 				SELECT @OutDocumentObjectUserRoleMappingId = -6, @ErrorDescription = 'Login user not found in system';
 				RETURN @OutDocumentObjectUserRoleMappingId;

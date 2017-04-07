@@ -47,7 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentFileBL.cs" />
+    <Compile Include="DocumentAccessBL.cs" />
     <Compile Include="DocumentFolderBL.cs" />
+    <Compile Include="DocumentPropertiesBL.cs" />
     <Compile Include="DocumentPropertiesNamesBL.cs" />
     <Compile Include="SystemBL.cs" />
     <Compile Include="SystemAdminBL.cs" />

@@ -52,24 +52,22 @@
 --	e. DirectoryPath	- PENDING(Function)
 
 --9. Document Files(Pending - Add logic for check rights)
---	a. Add				- DONE			- 
---	b. Edit				- DONE			- 
---	c. List				- DONE			- 
---	d. History			- DONE			- 
+--	a. Add				- DONE			- DONE
+--	b. Edit				- DONE			- DONE
+--	c. List				- DONE			- DONE
+--	d. History			- DONE			- DONE
 --	d. Delete			- PENDING
 --	d. View				- PENDING
 
 --10. Document Properites(Pending - Add logic for check rights)
---	a. Add				- DONE			- 
---	b. Edit				- DONE			- 
---	c. GET				- DONE			-
+--	a. Add				- DONE			- DONE
+--	b. Edit				- DONE			- DONE
+--	c. GET				- DONE			- DONE
 
 --11. UserRole Mapping to Folder & Files
---	a. Assign Rights to folder		- DONE
---	b. Assign Rights to files		- DONE
---	c. Remove rights from folder	- DONE
---	d. Remove rights from files		- DONE
---	e. Has access					- DONE - performance checking required
+--	a. Assign Rights to file/folder		- DONE	- DONE
+--	c. Remove rights from file/folder	- DONE	- DONE
+--	e. Has access						- DONE	- DONE
 
 --12. Miscellinous [For Authentication]  -- Not required currently, low priority
 --	a. Store Session Token in DB [SessionID, Token, UserID, Token, CreatedByIP, CreatedOn, LastAccessOn, IsActive, LogoutOn, LogoutRemark]
@@ -83,5 +81,3 @@
 --13. API for upload integration
 --	a. Mapping screen - UploadCode to our dms folder(UploadCode will be unique for there systemid) with description
 --	b. Upload API, will consist of DocumentDetails along with UploadCode, so as per UploadCode file will get uploaded to that folder in our system
-
-

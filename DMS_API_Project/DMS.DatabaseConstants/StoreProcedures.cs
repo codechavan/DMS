@@ -88,6 +88,7 @@ namespace DMS.DatabaseConstants
                 public const string UserRoleDescription = "@UserRoleDescription";
                 public const string ErrorDescription = "@ErrorDescription";
             }
+
             public class usp_Update_System_Parameters
             {
                 public const string SystemId = "@SystemId";
@@ -97,6 +98,7 @@ namespace DMS.DatabaseConstants
                 public const string ErrorCode = "@ErrorCode";
                 public const string ErrorDescription = "@ErrorDescription";
             }
+
             public class usp_Get_Systems_Parameters
             {
                 public const string PageIndex = "@iPageIndex";
@@ -371,6 +373,7 @@ namespace DMS.DatabaseConstants
                 public const string OutDocumentFileId = "@OutDocumentFileId";
                 public const string ErrorDescription = "@ErrorDescription";
             }
+
             public class usp_Create_Update_DocumentFileProperties_Parameters
             {
                 public const string DocumentFileId = "@DocumentFileId";
@@ -384,18 +387,21 @@ namespace DMS.DatabaseConstants
                 public const string Field8Value = "@Field8Value";
                 public const string Field9Value = "@Field9Value";
                 public const string Field10Value = "@Field10Value";
-                public const string DocumentFilePropertyCreatedBy = "@DocumentFilePropertyCreatedBy";
-                public const string OutDocumentFileId = "@OutDocumentFileId";
+                public const string CreatedBy = "@DocumentFilePropertyCreatedBy";
+                public const string ErrorCode = "@OutDocumentFileId";
                 public const string ErrorDescription = "@ErrorDescription";
             }
+
             public class usp_Get_DocumentFileHistory_Parameters
             {
                 public const string DocumentFileId = "@DocumentFileId";
             }
+
             public class usp_Get_DocumentFileProperties_Parameters
             {
                 public const string DocumentFileId = "@DocumentFileId";
             }
+
             public class usp_Get_DocumentFiles_Parameters
             {
                 public const string PageIndex = "@iPageIndex";
