@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMS.Model
 {
-    public enum DocuementObjectType
+    public enum DocumentObjectType
     {
         File = 1,
         Folder = 2

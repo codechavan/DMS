@@ -134,6 +134,7 @@
     <Build Include="StoreProcedures\dbo.usp_Get_SystemAdmins.sql" />
     <None Include="Default Data\dbo.SystemAdmins.sql" />
     <Build Include="StoreProcedures\dbo.usp_Get_Documents.sql" />
+    <Build Include="StoreProcedures\dbo.usp_Get_DocumentFoldersTree.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FileGroups\FileGroup.DocumentDataFiles.sql" />

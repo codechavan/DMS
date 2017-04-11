@@ -174,6 +174,23 @@ namespace DMS.DatabaseConstants
             public const string FileUploadedByUserFullName = "FileUploadedByUserFullName";
         }
 
+        public static class usp_Get_DocumentFoldersTree
+        {
+            public const string FolderId = "DocumentFolderId";
+            public const string FolderName = "DocumentFolderName";
+            public const string ParentId = "ParentDocumentFolderId";
+        }
+        public static class usp_Get_Documents
+        {
+            public const string ObjectId = "ObjectId";
+            public const string ObjectType = "ObjectType";
+            public const string Name = "Name";
+            public const string IsDeleted = "IsDeleted";
+            public const string CreatedBy = "CreatedBy";
+            public const string CreatedOn = "CreatedOn";
+            public const string ModifiedBy = "ModifiedBy";
+            public const string ModifiedOn = "ModifiedOn";
+        }
 
         public static class vw_DocumentFileProperties
         {

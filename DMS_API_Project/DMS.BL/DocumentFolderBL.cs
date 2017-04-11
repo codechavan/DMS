@@ -127,6 +127,39 @@ namespace DMS.BL
             }
         }
 
+        public List<DocumentFolderTree> GetDocumentFolderTree(long systemId)
+        {
+            try
+            {
+                return DocumentFolderRepository.GetDocumentFolderTree(systemId);
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
+
+        public DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters, PagingDetails pageDetail)
+        {
+            try
+            {
+                //if (searchParameters == null)
+                //{
+                //    return null;
+                //}
+                //if (searchParameters.SystemId <= 0)
+                //{
+                //    return null;
+                //}
+                return DocumentFolderRepository.GetDocumentObjectList(searchParameters, pageDetail);
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
 
         public void Dispose()
         {

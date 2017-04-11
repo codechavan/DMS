@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace DMS.Model
 {
-    public class DocumentAccessSearchParameter
+    public class DocumentSearchParameter
     {
         public long SystemId { get; set; }
-        public DocumentObjectType ObjectType { get; set; }
-        public long ObjectId { get; set; }
-        public long UserId { get; set; }
+        public long ParentFolderId { get; set; }
+        public string ObjectName { get; set; }
     }
 }

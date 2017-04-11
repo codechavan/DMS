@@ -24,6 +24,107 @@ namespace DMS.Repository.DAL
 
         public abstract DocumentFolderSearchData GetFolders(DocumentFolderSearchParameter searchParameters, PagingDetails pageDetail);
 
+        public abstract DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters, PagingDetails pageDetail);
+
+        public abstract List<DocumentFolderTree> GetDocumentFolderTree(long systemId);
+
+        protected string GetDocumentObjectsParameterString(DocumentSearchParameter searchParameters)
+        {
+            List<string> lstConditions = new List<string>();
+
+            if (searchParameters != null)
+            {
+                if (!string.IsNullOrEmpty(searchParameters.ObjectName))
+                {
+                    lstConditions.Add(Views.usp_Get_Documents.Name + " LIKE '%" + SQLSafety.GetSQLSafeString(searchParameters.ObjectName) + "%'");
+                }
+            }
+            return string.Join(" AND ", lstConditions);
+        }
+
+        protected string GetDocumentObjectOrderBy(string OrderByString)
+        {
+            List<string> lstColumns = new List<string>();
+            string columnName, orderBy;
+            if (!string.IsNullOrEmpty(OrderByString))
+            {
+                foreach (string column in OrderByString.Split(','))
+                {
+                    if (column.Split(' ').Length == 2)
+                    {
+                        columnName = column.Split(' ')[0].Trim();
+                        orderBy = column.Split(' ')[1].Trim();
+                        switch (orderBy.ToLower())
+                        {
+                            case "asc":
+                                orderBy = "ASC";
+                                break;
+                            case "desc":
+                                orderBy = "DESC";
+                                break;
+                            default:
+                                orderBy = "ASC";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        columnName = column.Trim();
+                        orderBy = "ASC";
+                    }
+
+                    columnName = columnName.ToUpper();
+                    if (columnName == Views.usp_Get_Documents.ObjectType.ToUpper())
+                    {
+                        lstColumns.Add(Views.usp_Get_Documents.ObjectType + " " + orderBy);
+                    }
+                    if (columnName == Views.usp_Get_Documents.Name.ToUpper())
+                    {
+                        lstColumns.Add(Views.usp_Get_Documents.Name + " " + orderBy);
+                    }
+                    if (columnName == Views.usp_Get_Documents.CreatedOn.ToUpper())
+                    {
+                        lstColumns.Add(Views.usp_Get_Documents.CreatedOn + " " + orderBy);
+                    }
+                    if (columnName == Views.usp_Get_Documents.ModifiedOn.ToUpper())
+                    {
+                        lstColumns.Add(Views.usp_Get_Documents.ModifiedOn + " " + orderBy);
+                    }
+                }
+            }
+            return string.Join(", ", lstColumns);
+        }
+
+        protected List<Document> CreateDocumentObject(IDataReader objReader)
+        {
+            List<Document> lstFolders = new List<Document>();
+            Document folder;
+            bool isnull = true;
+
+            while (objReader.Read())
+            {
+                isnull = false;
+                folder = new Document();
+                folder.ObjectId = objReader[Views.usp_Get_Documents.ObjectId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_Documents.ObjectId]) : 0;
+                folder.ObjectType =(DocumentObjectType) (objReader[Views.usp_Get_Documents.ObjectType] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_Documents.ObjectType]) : 1);
+                folder.Name = objReader[Views.usp_Get_Documents.Name] != DBNull.Value ? Convert.ToString(objReader[Views.usp_Get_Documents.Name]) : null;
+                folder.IsDeleted = objReader[Views.usp_Get_Documents.IsDeleted] != DBNull.Value ? Convert.ToBoolean(objReader[Views.usp_Get_Documents.IsDeleted]) : false;
+
+                folder.CreatedBy = objReader[Views.usp_Get_Documents.CreatedBy] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_Documents.CreatedBy]) : 0;
+                folder.CreatedOn = objReader[Views.usp_Get_Documents.CreatedOn] != DBNull.Value ? Convert.ToDateTime(objReader[Views.usp_Get_Documents.CreatedOn]) : DateTime.Now;
+                folder.ModifiedBy = objReader[Views.usp_Get_Documents.ModifiedBy] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_Documents.ModifiedBy]) : 0;
+                folder.ModifiedOn = null;
+                if (objReader[Views.usp_Get_Documents.ModifiedOn] != DBNull.Value)
+                {
+                    folder.ModifiedOn = Convert.ToDateTime(objReader[Views.usp_Get_Documents.ModifiedOn]);
+                }
+                lstFolders.Add(folder);
+            }
+
+            if (isnull) { return null; }
+            else { return lstFolders; }
+        }
+
 
 
         protected string GetDocumentFolderParameterString(DocumentFolderSearchParameter searchParameters)
@@ -155,6 +256,42 @@ namespace DMS.Repository.DAL
 
             if (isnull) { return null; }
             else { return lstFolders; }
+        }
+
+
+
+        protected List<DocumentFolderTree> CreateDocumentFolderTree(IDataReader objReader)
+        {
+            List<DocumentFolderTree> lstFolders = new List<DocumentFolderTree>();
+            DocumentFolderTree folder;
+            bool isnull = true;
+
+            while (objReader.Read())
+            {
+                isnull = false;
+                folder = new DocumentFolderTree();
+                folder.FolderId = objReader[Views.usp_Get_DocumentFoldersTree.FolderId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.FolderId]) : 0;
+                folder.FolderName = objReader[Views.usp_Get_DocumentFoldersTree.FolderName] != DBNull.Value ? Convert.ToString(objReader[Views.usp_Get_DocumentFoldersTree.FolderName]) : null;
+                folder.ParentFolderId = objReader[Views.usp_Get_DocumentFoldersTree.ParentId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.ParentId]) : 0;
+                lstFolders.Add(folder);
+            }
+
+            if (isnull) { return null; }
+            else { return lstFolders; }
+        }
+
+        protected List<DocumentFolderTree> GenerateFolderTree(List<DocumentFolderTree> allFolders, long parentFolderId)
+        {
+            List<DocumentFolderTree> lstFolders = new List<DocumentFolderTree>();
+            foreach (var item in allFolders)
+            {
+                if (item.ParentFolderId == parentFolderId)
+                {
+                    item.ChildFolders = GenerateFolderTree(allFolders, item.FolderId);
+                    lstFolders.Add(item);
+                }    
+            }
+            return lstFolders;
         }
 
     }

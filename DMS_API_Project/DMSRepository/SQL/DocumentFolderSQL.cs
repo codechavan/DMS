@@ -124,5 +124,92 @@ namespace DMS.Repository.SQL
             }
         }
 
+        public override DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters, PagingDetails pageDetail)
+        {
+            Database database;
+            DbCommand dbCommand;
+            try
+            {
+                if (searchParameters == null)
+                {
+                    searchParameters = new DocumentSearchParameter();
+                }
+                if (pageDetail == null)
+                {
+                    pageDetail = new PagingDetails();
+                }
+
+                DatabaseProviderFactory factory = new DatabaseProviderFactory();
+                database = factory.Create(ConnectionStringName);
+                dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_Documents);
+
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.SystemId, DbType.Int64, searchParameters.SystemId);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.ParentFolderId, DbType.Int64, searchParameters.ParentFolderId);
+
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.WhereCondition, DbType.String, GetDocumentObjectsParameterString(searchParameters));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.OrderBy, DbType.String, GetDocumentObjectOrderBy(pageDetail.OrderBy));
+
+                DocumentSearchData LstData = new DocumentSearchData();
+                List<Document> lstFolders = null;
+                using (IDataReader objReader = database.ExecuteReader(dbCommand))
+                {
+                    lstFolders = CreateDocumentObject(objReader);
+                    if (objReader.NextResult())
+                    {
+                        if (objReader.Read())
+                        {
+                            LstData.RecordCount = objReader[StoreProcedures.dbo.usp_Get_Documents_Parameters.Column_RecordCount] != DBNull.Value ? Convert.ToInt64(objReader[StoreProcedures.dbo.usp_Get_Documents_Parameters.Column_RecordCount]) : 0;
+                        }
+                    }
+                }
+                LstData.LstData = lstFolders;
+                LstData.PageDetail = pageDetail;
+
+                return LstData;
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw new ArgumentException("Error while fetching records");
+            }
+            finally
+            {
+                database = null;
+            }
+        }
+
+        public override List<DocumentFolderTree> GetDocumentFolderTree(long systemId)
+        {
+            Database database;
+            DbCommand dbCommand;
+            try
+            {
+                DatabaseProviderFactory factory = new DatabaseProviderFactory();
+                database = factory.Create(ConnectionStringName);
+                dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_DocumentFoldersTree);
+
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFoldersTree_Parameters.SystemId, DbType.Int64, systemId);
+
+                List<DocumentFolderTree> lstFolders = null;
+                using (IDataReader objReader = database.ExecuteReader(dbCommand))
+                {
+                    lstFolders = GenerateFolderTree(CreateDocumentFolderTree(objReader), 0);
+                }
+
+                return lstFolders;
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw new ArgumentException("Error while fetching records");
+            }
+            finally
+            {
+                database = null;
+            }
+        }
+
     }
 }

@@ -15,11 +15,19 @@ namespace DMS.DatabaseConstants
             {
                 public const string SystemId = "@SystemId";
                 public const string ParentFolderId = "@ParentFolderId";
-                public const string iPageIndex = "@iPageIndex";
-                public const string iPageSize = "@iPageSize";
-                public const string strWhere = "@strWhere";
-                public const string strOrderBy = "@strOrderBy";
+                public const string PageIndex = "@iPageIndex";
+                public const string PageSize = "@iPageSize";
+                public const string WhereCondition = "@strWhere";
+                public const string OrderBy = "@strOrderBy";
+                public const string Column_RecordCount = "RecordCount";
             }
+
+            public const string usp_Get_DocumentFoldersTree = "[dbo].[usp_Get_DocumentFoldersTree]";
+            public class usp_Get_DocumentFoldersTree_Parameters
+            {
+                public const string SystemId = "@SystemId";
+            }
+
 
             #region Document Access
 

@@ -9,7 +9,7 @@ namespace DMS.Model
     public class DocumentAccess
     {
         public long SystemId { get; set; }
-        public DocuementObjectType ObjectType { get; set; }
+        public DocumentObjectType ObjectType { get; set; }
         public long ObjectId { get; set; }
         public long UserRoleId { get; set; }
 
