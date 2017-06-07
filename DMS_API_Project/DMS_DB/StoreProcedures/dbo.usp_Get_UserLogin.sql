@@ -36,18 +36,27 @@ BEGIN
 	--Verify login
 	BEGIN
 		IF NOT EXISTS(SELECT 1 
-					FROM [dbo].[Users]
-					WHERE SystemId = @SystemId 
-						AND UserName = @UserName 
-						AND [dbo].[ufn_DecryptText](UserPassword) = @UserPassword
-						AND [UserIsLock] = 0
-						AND [UserIsActive] = 1
+					FROM [dbo].[Users] Usr
+						INNER JOIN [dbo].[Systems] Sy
+						ON Usr.[SystemId] = Sy.[SystemId]
+					WHERE Usr.SystemId = @SystemId 
+						AND Usr.UserName = @UserName 
+						AND [dbo].[ufn_DecryptText](Usr.UserPassword) = @UserPassword
+						AND Usr.[UserIsLock] = 0
+						AND Usr.[UserIsActive] = 1
+						AND Sy.[SystemIsActive] = 1
 					)
 		BEGIN
 			
 			IF NOT EXISTS(SELECT 1 FROM [dbo].[Systems] WHERE SystemId = @SystemId)
 			BEGIN
 				SELECT @OutUserId = -4, @ErrorDescription = 'System Id not found in system';
+				RETURN;
+			END
+
+			IF NOT EXISTS(SELECT 1 FROM [dbo].[Systems] WHERE SystemId = @SystemId AND [SystemIsActive] = 1)
+			BEGIN
+				SELECT @OutUserId = -5, @ErrorDescription = 'System not available';
 				RETURN;
 			END
 

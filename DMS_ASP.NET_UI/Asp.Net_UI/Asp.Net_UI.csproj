@@ -39,18 +39,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Chavan.Common">
-      <HintPath>..\ALL_References\Chavan.Common.dll</HintPath>
+      <HintPath>..\..\ALL_References\Chavan.Common.dll</HintPath>
     </Reference>
     <Reference Include="Chavan.Logger">
-      <HintPath>..\ALL_References\Chavan.Logger.dll</HintPath>
+      <HintPath>..\..\ALL_References\Chavan.Logger.dll</HintPath>
     </Reference>
-    <Reference Include="DMS.Model">
-      <HintPath>..\ALL_References\DMS.Model.dll</HintPath>
+    <Reference Include="DMS.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ALL_References\DMS.Model.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\ALL_References\EPPlus.dll</HintPath>
+      <HintPath>..\..\ALL_References\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ALL_References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -127,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\APIMethods.cs" />
     <Compile Include="HelperClasses\RequestHelper.cs" />
     <Compile Include="HelperClasses\SessionHelper.cs" />
     <Compile Include="HelperClasses\WebConstants.cs" />

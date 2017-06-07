@@ -35,6 +35,7 @@ namespace DMS.UI
         #region API URL
 
         public const string SystemDropDownAPI = "api/System/GetSystemDropdown";
+        public const string CreateDmsSystemAPI = "api/System/CreateDmsSystem";
         public const string LogonAPI = "api/UserAccount/Login";
 
         #endregion

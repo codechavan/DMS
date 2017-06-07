@@ -27,19 +27,19 @@
                         </div>
                         <div class="form-group">
                             <label for="TxtUserId" class="">User ID</label>
-                            <input type="text" class="form-control" id="TxtUserId" value="Administrator" placeholder="UserName" readonly="readonly" />
+                            <input  runat="server" type="text" class="form-control" id="TxtUserId" value="Administrator" placeholder="UserName" readonly="readonly" />
                         </div>
                         <div class="form-group">
-                            <label for="TxtUserName" class="">User Name</label>
-                            <input type="text" class="form-control" id="TxtUserName" value="Administrator" placeholder="User Name" readonly="readonly" />
+                            <label for="TxtRoleName" class="">Role Name</label>
+                            <input  runat="server" type="text" class="form-control" id="TxtRoleName" value="Administrator" placeholder="Role Name" readonly="readonly" />
                         </div>
                         <div class="form-group">
                             <label for="TxtPassword" class="">Password</label>
-                            <input type="password" class="form-control" id="TxtPassword" maxlength="50" placeholder="Password" />
+                            <input runat="server" type="password" class="form-control" id="TxtPassword" maxlength="50" placeholder="Password" />
                         </div>
                         <div class="form-group">
                             <label for="TxtPasswordConfirm" class="">Confirm Password</label>
-                            <input type="password" class="form-control" id="TxtPasswordConfirm" maxlength="50" placeholder="Confirm Password" />
+                            <input runat="server" type="password" class="form-control" id="TxtPasswordConfirm" maxlength="50" placeholder="Confirm Password" />
                         </div>
                         <div class="form-group">
                             <label for="reg_email" class="">Email</label>

@@ -86,7 +86,7 @@ BEGIN
 			VALUES(
 				@SystemId,
 				@UserName,
-				@UserPassword,
+				[dbo].[ufn_EncryptText](@UserPassword),
 				@UserFullName,
 				@UserEmailId,
 				CASE WHEN COALESCE(@UserRoleId,0) = 0 THEN NULL ELSE @UserRoleId END,

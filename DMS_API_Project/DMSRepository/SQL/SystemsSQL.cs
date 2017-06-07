@@ -40,6 +40,7 @@ namespace DMS.Repository.SQL
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_system_Parameters.UserPassword, DbType.String, dmsUser.Password);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_system_Parameters.UserRoleName, DbType.String, userRole.RoleName);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_system_Parameters.UserRoleDescription, DbType.String, userRole.Description);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_system_Parameters.UserEmailId, DbType.String, dmsUser.EmailId);
 
                 database.AddOutParameter(dbCommand, StoreProcedures.dbo.usp_create_system_Parameters.SystemId, DbType.Int64, int.MaxValue);
                 database.AddOutParameter(dbCommand, StoreProcedures.dbo.usp_create_system_Parameters.ErrorDescription, DbType.String, 500);

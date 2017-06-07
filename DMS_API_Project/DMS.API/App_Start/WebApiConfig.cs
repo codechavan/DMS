@@ -21,7 +21,7 @@ namespace DMS.API
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.MessageHandlers.Add(new BasicAuthenticationHandler());
+            //config.MessageHandlers.Add(new BasicAuthenticationHandler());
 
         }
     }

@@ -1,10 +1,10 @@
-﻿----Module Name			-DB Level		-Middle Layer		-WEB PAGE		-Testing
+﻿----Module Name			-DB Level		-Middle Layer		-API			-WEB PAGE		-Testing
 
 --1. System creation
---	a. Add				- DONE			- DONE
+--	a. Add(Registration)- DONE			- DONE			-DONE
 --	b. Edit				- DONE			- DONE
 --	c. List				- DONE			- DONE
---	d. SystemCode		- PENDING
+--	d. SystemCode(AphaNum)- PENDING
 
 --2. Role Creation
 --	a. Add				- DONE			- DONE
@@ -16,7 +16,7 @@
 --	b. Edit				- DONE			- DONE
 --	c. Change Password	- DONE			- DONE
 --	d. Unlock user		- DONE			- DONE
---	e. Login			- DONE			- DONE
+--	e. Login			- DONE			- DONE			-DONE
 --	f. List				- DONE			- DONE
 --	g. Generate Token	- DONE			- DONE
 --	h. AuthenticateToken- DONE			- DONE

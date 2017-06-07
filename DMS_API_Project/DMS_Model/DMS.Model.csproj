@@ -61,6 +61,7 @@
     <Compile Include="DocumentFolderSearchParameter.cs" />
     <Compile Include="DocumentFolder.cs" />
     <Compile Include="DocumentPropertiesNames.cs" />
+    <Compile Include="NewDmsSystem.cs" />
     <Compile Include="SysConfigurationSearchData.cs" />
     <Compile Include="SystemAdminSearchData.cs" />
     <Compile Include="SystemAdminLoginIdentity.cs" />

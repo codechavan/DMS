@@ -31,7 +31,8 @@ namespace DMS.API
         {
             if (
                 request.RequestUri.ToString().Contains("api/System/GetSystemDropdown") ||
-                request.RequestUri.ToString().Contains("api/UserAccount/Login")
+                request.RequestUri.ToString().Contains("api/UserAccount/Login") ||
+                request.RequestUri.ToString().Contains("api/UserAccount/CreateDmsSystem")
                 )
             {
                 return base.SendAsync(request, cancellationToken); ;

@@ -10,7 +10,19 @@
 --------------------------------------------------------------------------------------
 */
 
+/*
+EXEC sp_configure filestream_access_level, 2  
+RECONFIGURE  
+*/
+
 ALTER DATABASE [$(DatabaseName)]
 ADD FILEGROUP [DocumentDataFiles] CONTAINS FILESTREAM 
+
+GO
+
+
+ALTER DATABASE [$(DatabaseName)] 
+ADD FILE (NAME = DocumentDataFiles,
+FILENAME = 'C:\Databases\DocumentDataFiles') TO FILEGROUP DocumentDataFiles
 
 GO

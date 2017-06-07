@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Chavan.Common">
-      <HintPath>..\ALL_References\Chavan.Common.dll</HintPath>
+      <HintPath>..\..\ALL_References\Chavan.Common.dll</HintPath>
     </Reference>
     <Reference Include="Chavan.Logger">
-      <HintPath>..\..\Chavan.Logger.dll</HintPath>
+      <HintPath>..\..\ALL_References\Chavan.Logger.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>

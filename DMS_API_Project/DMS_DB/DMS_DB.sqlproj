@@ -24,6 +24,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+    <DefaultFileStreamFilegroup>DocumentDataFiles</DefaultFileStreamFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -137,7 +138,7 @@
     <Build Include="StoreProcedures\dbo.usp_Get_DocumentFoldersTree.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FileGroups\FileGroup.DocumentDataFiles.sql" />
+    <Build Include="FileGroups\FileGroup.DocumentDataFiles.sql" />
     <None Include="Default Data\dbo.SystemParameters.sql" />
   </ItemGroup>
   <ItemGroup>
