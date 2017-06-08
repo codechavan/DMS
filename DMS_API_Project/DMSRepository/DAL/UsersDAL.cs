@@ -47,7 +47,7 @@ namespace DMS.Repository.DAL
                 usr.UserName = objReader[Views.DmsUsers.UserName] != DBNull.Value ? Convert.ToString(objReader[Views.DmsUsers.UserName]) : null;
                 usr.FullName = objReader[Views.DmsUsers.UserFullName] != DBNull.Value ? Convert.ToString(objReader[Views.DmsUsers.UserFullName]) : null;
                 usr.EmailId = objReader[Views.DmsUsers.UserEmailId] != DBNull.Value ? Convert.ToString(objReader[Views.DmsUsers.UserEmailId]) : null;
-                usr.Password = objReader[Views.DmsUsers.UserPassword] != DBNull.Value ? Convert.ToString(objReader[Views.DmsUsers.UserPassword]) : null;
+                usr.Password = Chavan.Common.EncryptionHelper.Instance.Decrypt(objReader[Views.DmsUsers.UserPassword] != DBNull.Value ? Convert.ToString(objReader[Views.DmsUsers.UserPassword]) : null);
                 usr.IsActive = objReader[Views.DmsUsers.UserIsActive] != DBNull.Value ? Convert.ToBoolean(objReader[Views.DmsUsers.UserIsActive]) : false;
                 usr.IsAdmin = objReader[Views.DmsUsers.UserIsAdmin] != DBNull.Value ? Convert.ToBoolean(objReader[Views.DmsUsers.UserIsAdmin]) : false;
                 usr.IsLock = objReader[Views.DmsUsers.UserIsLock] != DBNull.Value ? Convert.ToBoolean(objReader[Views.DmsUsers.UserIsLock]) : false;

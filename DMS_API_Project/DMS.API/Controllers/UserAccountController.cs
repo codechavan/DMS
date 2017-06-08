@@ -27,20 +27,20 @@ namespace DMS.API.Controllers
 
         #region Public Methods
         [HttpPost]
-        public FunctionReturnStatus GetUserList(DmsUserSearchParameter searchParameter)
+        public DmsUserSearchData GetUserList(DmsUserSearchParameter searchParameter)
         {
-            IList<DmsUser> lstUsers = null;
-            FunctionReturnStatus result = null;
             try
             {
-
+                using (UserBL userBL = new UserBL(ConfigurationManager.ConnectionStrings[0].Name))
+                {
+                    return userBL.GetUser(searchParameter, null);
+                }
             }
             catch (Exception ex)
             {
                 logger.LogEvent(ex.ToString(), LogLevel.Error);
                 throw;
             }
-            return result;
         }
 
         [AllowAnonymous]

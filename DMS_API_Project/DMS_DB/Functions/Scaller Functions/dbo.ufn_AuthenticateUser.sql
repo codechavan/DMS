@@ -11,7 +11,7 @@ BEGIN
 				FROM [dbo].[Users]
 				WHERE COALESCE([SystemId], 0) = @SystemId 
 					AND [UserName] = @UserName
-					AND COALESCE([dbo].[ufn_DecryptText](UserPassword), '') = @Password
+					AND [UserPassword] = @Password
 					AND [UserIsActive] = 1
 					AND [UserIsLock] = 0)
 	BEGIN

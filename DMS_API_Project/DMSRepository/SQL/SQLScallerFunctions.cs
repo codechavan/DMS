@@ -24,7 +24,17 @@ namespace DMS.Repository.SQL
             logger = new Logger("DMS.Repository.SQL.SQLScallerFunctions");
         }
 
-        private static string EncodeBase64(string text)
+        protected static string DecodeBase64(string text)
+        {
+            if (text == null)
+            {
+                return null;
+            }
+            var base64EncodedBytes = System.Convert.FromBase64String(text);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
+        protected static string EncodeBase64(string text)
         {
             if (text == null)
             {
@@ -90,7 +100,7 @@ namespace DMS.Repository.SQL
                 database = null;
             }
         }
-        
+
         public string GetSystemParameterValue(long systemId, string systemParameterName)
         {
             Database database;
@@ -134,7 +144,7 @@ namespace DMS.Repository.SQL
                 database.AddInParameter(dbCommand, "@UserName", DbType.String, username);
                 database.AddInParameter(dbCommand, "@Password", DbType.String, password);
 
-                isValid = Convert.ToBoolean( database.ExecuteScalar(dbCommand));
+                isValid = Convert.ToBoolean(database.ExecuteScalar(dbCommand));
                 return isValid;
             }
             catch (Exception ex)

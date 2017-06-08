@@ -11,7 +11,7 @@ namespace DMS.UI
 
         #region Session Storage
 
-        public const string SessionAuthorizationIdentifier = "AuthorizationHeader";
+        public const string SessionAuthorizationIdentifier = "Authorization";
         public const string SessionTokenIdIdentifier = "TokenId";
         public const string SessionAllowCredentials = "AllowCredentials";
         #endregion
@@ -37,6 +37,7 @@ namespace DMS.UI
         public const string SystemDropDownAPI = "api/System/GetSystemDropdown";
         public const string CreateDmsSystemAPI = "api/System/CreateDmsSystem";
         public const string LogonAPI = "api/UserAccount/Login";
+        public const string GetUserListAPI = "api/UserAccount/GetUserList";
 
         #endregion
 

@@ -28,7 +28,7 @@ namespace DMS.UI
                 if (isAuthenticationRequired)
                 {
                     client.DefaultRequestHeaders.Add(WebConstants.SessionTokenIdIdentifier, DateTime.Now.ToString("ddMMyyyyhhmmss"));
-                    client.DefaultRequestHeaders.Add(WebConstants.SessionAuthorizationIdentifier, SessionHelper.LogonUserToken);
+                    client.DefaultRequestHeaders.Add(WebConstants.SessionAuthorizationIdentifier,"Basic " + SessionHelper.LogonUserToken);
                 }
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

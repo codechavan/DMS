@@ -98,7 +98,7 @@ BEGIN
 		AND UserName = @UserName 
 		AND [UserIsLock] = 0 
 		AND [UserIsActive] = 1 
-		AND [dbo].[ufn_DecryptText](UserPassword) = @UserPassword
+		AND [UserPassword] = @UserPassword
 
 	UPDATE [dbo].[Users] 
 	SET [UserLastLoginDate] = GETDATE()

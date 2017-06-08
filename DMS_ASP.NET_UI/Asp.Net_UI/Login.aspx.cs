@@ -38,6 +38,16 @@ namespace DMS.UI
             prm.UserName = TxtUserName.Text;
             prm.SystemID = long.Parse(DdlSystems.SelectedValue);
             FunctionReturnStatus sts = APIMethods.Login(prm);
+
+            if (sts.StatusType == StatusType.Success)
+            {
+                DmsUser usr = (DmsUser)sts.Data;
+                FunctionReturnStatus snStatus = SessionHelper.CreateUserSession(usr, usr.LogonToken);
+                if (snStatus.StatusType == StatusType.Success)
+                {
+                    Response.Redirect("Dashboard.aspx");
+                }
+            }
         }
 
     }

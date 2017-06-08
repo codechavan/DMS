@@ -8,7 +8,7 @@ AS
 		US.[UserName],
 		US.[UserFullName],
 		US.[UserEmailId],
-		US.[UserPassword],
+		dbo.ufn_DecryptText(US.[UserPassword]) AS UserPassword,
 		US.[UserIsActive],
 		US.[UserIsAdmin],
 		US.[UserIsLock],

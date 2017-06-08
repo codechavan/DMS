@@ -104,7 +104,7 @@ namespace DMS.API
             if (string.IsNullOrEmpty(authHeader))
                 return null;
 
-            authHeader = Encoding.Default.GetString(Convert.FromBase64String(authHeader));
+            //authHeader = Encoding.Default.GetString(Convert.FromBase64String(authHeader));
 
             //// find first : as password allows for :
             //int idx = authHeader.IndexOf(':');

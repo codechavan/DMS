@@ -42,7 +42,7 @@ namespace DMS.Repository.SQL
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_update_user_Parameters.UserCreatedBy, DbType.Int64, (user.ModifiedBy <= 0 ? user.CreatedBy : user.ModifiedBy));
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_update_user_Parameters.UserIsActive, DbType.Boolean, user.IsActive);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_update_user_Parameters.UserIsAdmin, DbType.Boolean, user.IsAdmin);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_update_user_Parameters.UserPassword, DbType.String, user.Password);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_update_user_Parameters.UserPassword, DbType.String, Chavan.Common.EncryptionHelper.Instance.Encrypt(user.Password));
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_create_update_user_Parameters.UserRoleId, DbType.Int64, user.RoleID);
 
                 database.AddOutParameter(dbCommand, StoreProcedures.dbo.usp_create_update_user_Parameters.OutUserId, DbType.Int64, int.MaxValue);
@@ -88,7 +88,7 @@ namespace DMS.Repository.SQL
 
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_UserLogin_Parameters.SystemId, DbType.Int64, systemId);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_UserLogin_Parameters.UserName, DbType.String, username);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_UserLogin_Parameters.UserPassword, DbType.String, password);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_UserLogin_Parameters.UserPassword, DbType.String, Chavan.Common.EncryptionHelper.Instance.Encrypt(password));
 
                 database.AddOutParameter(dbCommand, StoreProcedures.dbo.usp_Get_UserLogin_Parameters.OutUserId, DbType.Int64, int.MaxValue);
                 database.AddOutParameter(dbCommand, StoreProcedures.dbo.usp_Get_UserLogin_Parameters.ErrorDescription, DbType.String, 500);
@@ -144,7 +144,7 @@ namespace DMS.Repository.SQL
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_LogonDetail);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_LogonDetail_Parameters.LogonToken, DbType.String, Chavan.Common.EncryptionHelper.Instance.Decrypt64(logonToken));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_LogonDetail_Parameters.LogonToken, DbType.String, Chavan.Common.EncryptionHelper.Instance.Decrypt64(DecodeBase64(logonToken)));
                 BasicAuthenticationIdentity identity = null;
                 using (IDataReader objReader = database.ExecuteReader(dbCommand))
                 {
@@ -230,7 +230,7 @@ namespace DMS.Repository.SQL
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Update_UserPassword_Parameters.SystemId, DbType.Int64, systemId);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Update_UserPassword_Parameters.UserId, DbType.Int64, userId);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Update_UserPassword_Parameters.UserLastPasswordChangedBy, DbType.Int64, updatedByUser);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Update_UserPassword_Parameters.UserPassword, DbType.String, newPassword);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Update_UserPassword_Parameters.UserPassword, DbType.String, Chavan.Common.EncryptionHelper.Instance.Encrypt(newPassword));
 
                 database.AddOutParameter(dbCommand, StoreProcedures.dbo.usp_Update_UserPassword_Parameters.OutUserId, DbType.Int64, int.MaxValue);
                 database.AddOutParameter(dbCommand, StoreProcedures.dbo.usp_Update_UserPassword_Parameters.ErrorDescription, DbType.String, 500);

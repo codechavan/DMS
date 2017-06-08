@@ -11,7 +11,10 @@ namespace DMS.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                APIMethods.GetUserList(null);
+            }
         }
     }
 }
