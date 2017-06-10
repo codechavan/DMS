@@ -12,13 +12,17 @@ namespace DMS.UI
     {
 
         #region Page Events
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Init(object sender, EventArgs e) {
+
             if (SessionHelper.LogonUser == null)
             {
                 Session.Abandon();
                 Response.Redirect("Login.aspx");
+                Response.Close();
             }
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
             if (!IsPostBack)
             {
                 hdnApplicationUrl.Value = HttpRuntime.AppDomainAppVirtualPath;

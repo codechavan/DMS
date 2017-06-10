@@ -69,7 +69,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override SystemParameterValueSearchData GetSystemParameterValue(SystemParameterSearchParameters searchParameters, PagingDetails pageDetail)
+        public override SystemParameterValueSearchData GetSystemParameterValue(SystemParameterSearchParameters searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -81,19 +81,20 @@ namespace DMS.Repository.SQL
                     searchParameters = new SystemParameterSearchParameters();
                     searchParameters.SystemId = 0; //TODO : should not fetch for all system id
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
 
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_SystemParameterValues);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.SystemId, DbType.Int64, searchParameters.SystemId);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.PageIndex, DbType.Int32, searchParameters.PageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.PageSize, DbType.Int32, searchParameters.PageDetail.PageSize);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.WhereCondition, DbType.String, GetSystemParameterValueSearchParameterString(searchParameters));
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.OrderBy, DbType.String, GetSystemParameterValueOrderBy(pageDetail.OrderBy));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_SystemParameterValues_Parameters.OrderBy, DbType.String, GetSystemParameterValueOrderBy(searchParameters.PageDetail.OrderBy));
 
                 SystemParameterValueSearchData LstData = new SystemParameterValueSearchData(); 
                 List<SystemParameterValue> lstParamValues = null;
@@ -109,7 +110,7 @@ namespace DMS.Repository.SQL
                     }
                 }
                 LstData.LstData = lstParamValues;
-                LstData.PageDetail = pageDetail;
+                LstData.PageDetail = searchParameters.PageDetail;
                 return LstData;
             }
             catch (Exception ex)

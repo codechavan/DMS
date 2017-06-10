@@ -13,5 +13,7 @@ namespace DMS.Model
         public long SystemId { get; set; }
 
         public string SystemParameterName { get; set; }
+
+        public PagingDetails PageDetail { get; set; }
     }
 }

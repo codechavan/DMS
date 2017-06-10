@@ -33,3 +33,22 @@ BEGIN
 		GETDATE()
 	)
 END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[SystemParameters] WHERE SystemParameterName = 'CAN_UPLOAD_FILE_FROM_UI')
+BEGIN
+	INSERT INTO [dbo].[SystemParameters]
+	(
+		SystemParameterName,
+		SystemParameterDescription,
+		SystemParameterDefaultValue,
+		SystemParameterCreatedOn
+	)
+	VALUES
+	(
+		'CAN_UPLOAD_FILE_FROM_UI',
+		'0. Only can upload from provided API
+		1. User can upload file by using UI',
+		'0',
+		GETDATE()
+	)
+END

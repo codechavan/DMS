@@ -58,9 +58,9 @@ namespace DMS.Repository.SQL
                     if (Convert.ToInt64(status.Data) > 0)
                     {
                         status.StatusType = StatusType.Success;
-                        properties.DocumentFileId = Convert.ToInt64(status.Data);
-                        if (properties != null && properties.DocumentFileId > 0)
+                        if (properties != null)
                         {
+                            properties.DocumentFileId = Convert.ToInt64(status.Data);
                             using (DocumentPropertiesSQL docProp = new DocumentPropertiesSQL(ConnectionStringName))
                             {
                                 FunctionReturnStatus propStatus = new FunctionReturnStatus();

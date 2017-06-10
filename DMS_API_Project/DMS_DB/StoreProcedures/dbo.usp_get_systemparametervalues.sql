@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[usp_Get_SystemParameterValues]
 (
+	@SystemId				NUMERIC = 0,  
 	@iPageIndex				INT = 0,  
 	@iPageSize				INT = 0,  
 	@strWhere				VARCHAR(MAX) = '',  
@@ -11,7 +12,7 @@ BEGIN
 	DECLARE	@strSQL NVARCHAR(MAX),  
 			@iRowStart INT,  
 			@iRowEnd INT,
-			@strObject VARCHAR(128)
+			@strObject VARCHAR(MAX)
   
    SELECT	@iPageIndex = COALESCE( @iPageIndex, 0 ),  
 		   	@iPageSize = COALESCE( @iPageSize, 0 ),  
@@ -25,7 +26,27 @@ BEGIN
 			@strOrderBy = ( CASE WHEN @strOrderBy = '' THEN '[SystemName], [SystemParameterName]' ELSE @strOrderBy END )  
 	
 	
-	SELECT	@strObject = '[dbo].[vw_systemparametervalues]'
+	SELECT	@strObject = '(SELECT S.[SystemName],
+			SP.[SystemParameterName],
+			SP.[SystemParameterDescription],
+			SP.[SystemParameterDefaultValue],
+			COALESCE(SPV.[SystemID],' + CAST(@SystemId AS NVARCHAR(20)) +') AS [SystemID],
+			SPV.[SystemParameterId],
+			CASE WHEN SPV.[SystemParameterId] IS NOT NULL THEN
+				SPV.[SystemParameterValue] 
+				ELSE SP.[SystemParameterDefaultValue]
+			END AS [SystemParameterValue],
+			SPV.[SystemParameterValueCreatedBy],
+			SPV.[SystemParameterValueCreatedOn],
+			SPV.[SystemParameterValueModifiedBy],
+			SPV.[SystemParameterValueModifiedOn]
+	FROM 
+		[dbo].[SystemParameters] SP
+		LEFT JOIN [dbo].[SystemParameterValues] SPV
+			ON SP.[SystemParameterId] = SPV.[SystemParameterId]
+			AND SPV.[SystemID] = ' + CAST(@SystemId AS NVARCHAR(20)) +'
+		LEFT JOIN [dbo].[Systems] S
+			ON SPV.[SystemID] = S.[SystemId]) T'
 	        
 	SELECT @strSQL = 'SELECT * '  
 		 + 'FROM  ( '  

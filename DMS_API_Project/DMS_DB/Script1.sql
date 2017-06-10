@@ -45,14 +45,14 @@
 --	b. List				- DONE			- DONE
 
 --8. Document Folder(Pending - Add logic for check rights)
---	a. Add				- DONE			- DONE
+--	a. Add				- DONE			- DONE			-DONE
 --	b. Edit				- DONE			- DONE
 --	c. List				- DONE			- DONE
 --	d. Delete			- PENDING
 --	e. DirectoryPath	- PENDING(Function)
 
 --9. Document Files(Pending - Add logic for check rights)
---	a. Add				- DONE			- DONE
+--	a. Add				- DONE			- DONE			-DONE
 --	b. Edit				- DONE			- DONE
 --	c. List				- DONE			- DONE
 --	d. History			- DONE			- DONE

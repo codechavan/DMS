@@ -41,6 +41,9 @@ namespace DMS.UI
         public const string GetDocumentFolderTreeAPI = "api/DocumentFolder/GetDocumentFolderTree";
         public const string GetDocumentObjectListAPI = "api/DocumentFolder/GetDocumentObjectList";
         public const string CreateFolderAPI = "api/DocumentFolder/CreateFolder";
+        public const string GetSystemParameterValuesAPI = "api/SystemParameter/GetSystemParameterValues";
+        public const string GetSystemParameterValueAPI = "api/SystemParameter/GetSystemParameterValue";
+        public const string UploadFileAPI = "api/DocumentFile/UploadFile";
         
         #endregion
 

@@ -11,6 +11,8 @@ namespace DMS.UI
 {
     public class APIMethods
     {
+        private const string APIFailureMessage = "Error in communication to API";
+
         public static IList<DmsSystem> GetSystemDropdown()
         {
             try
@@ -22,7 +24,7 @@ namespace DMS.UI
                 }
                 else
                 {
-                    throw new HttpException("Error in communication to API");
+                    throw new HttpException(APIFailureMessage);
                 }
             }
             catch (Exception ex)
@@ -42,7 +44,7 @@ namespace DMS.UI
                 }
                 else
                 {
-                    throw new HttpException("Error in communication to API");
+                    throw new HttpException(APIFailureMessage);
                 }
             }
             catch (Exception ex)
@@ -67,7 +69,7 @@ namespace DMS.UI
                 }
                 else
                 {
-                    throw new HttpException("Error in communication to API");
+                    throw new HttpException(APIFailureMessage);
                 }
             }
             catch (Exception ex)
@@ -87,7 +89,7 @@ namespace DMS.UI
                 }
                 else
                 {
-                    throw new HttpException("Error in communication to API");
+                    throw new HttpException(APIFailureMessage);
                 }
             }
             catch (Exception ex)
@@ -107,7 +109,7 @@ namespace DMS.UI
                 }
                 else
                 {
-                    throw new HttpException("Error in communication to API");
+                    throw new HttpException(APIFailureMessage);
                 }
             }
             catch (Exception ex)
@@ -115,7 +117,6 @@ namespace DMS.UI
                 throw ex;
             }
         }
-
 
         public static DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters)
         {
@@ -128,7 +129,7 @@ namespace DMS.UI
                 }
                 else
                 {
-                    throw new HttpException("Error in communication to API");
+                    throw new HttpException(APIFailureMessage);
                 }
             }
             catch (Exception ex)
@@ -148,7 +149,7 @@ namespace DMS.UI
                 }
                 else
                 {
-                    throw new HttpException("Error in communication to API");
+                    throw new HttpException(APIFailureMessage);
                 }
             }
             catch (Exception ex)
@@ -156,5 +157,46 @@ namespace DMS.UI
                 throw ex;
             }
         }
+
+        public static SystemParameterValueSearchData GetSystemParameterList(SystemParameterSearchParameters searchParameters)
+        {
+            try
+            {
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.GetSystemParameterValuesAPI, searchParameters);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<SystemParameterValueSearchData>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException(APIFailureMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static FunctionReturnStatus UploadFile(DocumentFile file)
+        {
+            try
+            {
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.UploadFileAPI, file);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<FunctionReturnStatus>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException(APIFailureMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

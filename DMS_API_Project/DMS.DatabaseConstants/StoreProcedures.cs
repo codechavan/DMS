@@ -212,6 +212,7 @@ namespace DMS.DatabaseConstants
 
             public class usp_Get_SystemParameterValues_Parameters
             {
+                public const string SystemId = "@SystemId";
                 public const string PageIndex = "@iPageIndex";
                 public const string PageSize = "@iPageSize";
                 public const string WhereCondition = "@strWhere";

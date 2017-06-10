@@ -68,14 +68,14 @@ namespace DMS.BL
             }
             SystemParameterSearchParameters searchParameters = new SystemParameterSearchParameters();
             searchParameters.SystemId = systemId;
-            return GetSystemParameterValues(searchParameters, null);
+            return GetSystemParameterValues(searchParameters);
         }
 
-        public SystemParameterValueSearchData GetSystemParameterValues(SystemParameterSearchParameters searchParameters, PagingDetails pageDetail)
+        public SystemParameterValueSearchData GetSystemParameterValues(SystemParameterSearchParameters searchParameters)
         {
             try
             {
-                return SystemParameterRepository.GetSystemParameterValue(searchParameters, pageDetail);
+                return SystemParameterRepository.GetSystemParameterValue(searchParameters);
             }
             catch (Exception ex)
             {

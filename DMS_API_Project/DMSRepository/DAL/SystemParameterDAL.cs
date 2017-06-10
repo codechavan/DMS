@@ -21,7 +21,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus UpdateSystemParameterValue(SystemParameterValue paramValue);
 
-        public abstract SystemParameterValueSearchData GetSystemParameterValue(SystemParameterSearchParameters searchParameters, PagingDetails pageDetail);
+        public abstract SystemParameterValueSearchData GetSystemParameterValue(SystemParameterSearchParameters searchParameters);
 
         public abstract List<SystemParameter> GetSystemParameter(long systemParameterId);
 

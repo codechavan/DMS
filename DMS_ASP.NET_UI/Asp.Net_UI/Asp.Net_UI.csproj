@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="HelperClasses\APIMethods.cs" />
     <Compile Include="HelperClasses\RequestHelper.cs" />
+    <Compile Include="HelperClasses\SystemParamsterHelper.cs" />
     <Compile Include="HelperClasses\SessionHelper.cs" />
     <Compile Include="HelperClasses\WebConstants.cs" />
     <Compile Include="Login.aspx.cs">
