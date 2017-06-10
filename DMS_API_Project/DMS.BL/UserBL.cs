@@ -264,8 +264,10 @@ namespace DMS.BL
 
         public bool IsAuthenticateUser(long systemId, string username, string password)
         {
-            SQLScallerFunctions functions = new SQLScallerFunctions(ConnectionStringName);
-            return functions.AuthenticateUser(systemId, username, password);
+            using (SQLScallerFunctions functions = new SQLScallerFunctions(ConnectionStringName))
+            {
+                return functions.AuthenticateUser(systemId, username, password);
+            }
         }
 
 

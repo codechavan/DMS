@@ -127,7 +127,7 @@ namespace DMS.BL
             }
         }
 
-        public List<DocumentFolderTree> GetDocumentFolderTree(long systemId)
+        public IList<DocumentFolderTree> GetDocumentFolderTree(long systemId)
         {
             try
             {

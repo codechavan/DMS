@@ -8,9 +8,20 @@ namespace DMS.Model
 {
     public class DocumentFolderTree
     {
-        public long FolderId { get; set; }
-        public string FolderName { get; set; }
-        public long ParentFolderId { get; set; }
-        public List<DocumentFolderTree> ChildFolders { get; set; }
+        public long id { get; set; }
+        public string text { get; set; }
+        public long parentId { get; set; }
+        public TreeState state { get; set; }
+        public string icon { get { return "fa fa-folder-o"; } } //glyphicon glyphicon-stop
+        public string selectedIcon { get { return "fa fa-folder-open-o"; } } //glyphicon glyphicon-stop
+        public List<DocumentFolderTree> nodes { get; set; }
+    }
+
+    public class TreeState
+    {
+        public bool @checked { get; set; }
+        public bool disabled { get; set; }
+        public bool expanded { get; set; }
+        public bool selected { get; set; }
     }
 }

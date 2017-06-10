@@ -31,7 +31,7 @@ namespace DMS.API.Controllers
         {
             try
             {
-                using (UserBL userBL = new UserBL(ConfigurationManager.ConnectionStrings[0].Name))
+                using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
                 {
                     return userBL.GetUser(searchParameter, null);
                 }
@@ -50,7 +50,7 @@ namespace DMS.API.Controllers
             FunctionReturnStatus result = null;
             try
             {
-                using (UserBL userBL = new UserBL(ConfigurationManager.ConnectionStrings[0].Name))
+                using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
                 {
                     result = userBL.UserLogin(loginParameter.SystemID, loginParameter.UserName, loginParameter.Password);
                 }

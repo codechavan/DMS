@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -95,6 +96,27 @@ namespace DMS.UI
             }
         }
 
+        public static IList<DocumentFolderTree> GetDocumentFolderTree(long systemId)
+        {
+            try
+            {
+                dynamic prmObj = new ExpandoObject();
+                prmObj.systemId = systemId;
 
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.GetDocumentFolderTreeAPI, null);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<IList<DocumentFolderTree>>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException("Error in communication to API");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

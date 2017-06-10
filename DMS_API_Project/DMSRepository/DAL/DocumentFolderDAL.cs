@@ -259,25 +259,28 @@ namespace DMS.Repository.DAL
         }
 
 
-
         protected List<DocumentFolderTree> CreateDocumentFolderTree(IDataReader objReader)
         {
             List<DocumentFolderTree> lstFolders = new List<DocumentFolderTree>();
             DocumentFolderTree folder;
-            bool isnull = true;
+
+            //Add default root folder, all folder with empty/0 parentid will get bind to this.
+            folder = new DocumentFolderTree();
+            folder.id = -1;
+            folder.text = "Root";
+            folder.parentId = 0;
+            lstFolders.Add(folder);
 
             while (objReader.Read())
             {
-                isnull = false;
                 folder = new DocumentFolderTree();
-                folder.FolderId = objReader[Views.usp_Get_DocumentFoldersTree.FolderId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.FolderId]) : 0;
-                folder.FolderName = objReader[Views.usp_Get_DocumentFoldersTree.FolderName] != DBNull.Value ? Convert.ToString(objReader[Views.usp_Get_DocumentFoldersTree.FolderName]) : null;
-                folder.ParentFolderId = objReader[Views.usp_Get_DocumentFoldersTree.ParentId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.ParentId]) : 0;
+                folder.id = objReader[Views.usp_Get_DocumentFoldersTree.FolderId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.FolderId]) : 0;
+                folder.text = objReader[Views.usp_Get_DocumentFoldersTree.FolderName] != DBNull.Value ? Convert.ToString(objReader[Views.usp_Get_DocumentFoldersTree.FolderName]) : null;
+                folder.parentId = objReader[Views.usp_Get_DocumentFoldersTree.ParentId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.ParentId]) : 0;
                 lstFolders.Add(folder);
             }
 
-            if (isnull) { return null; }
-            else { return lstFolders; }
+            return lstFolders;
         }
 
         protected List<DocumentFolderTree> GenerateFolderTree(List<DocumentFolderTree> allFolders, long parentFolderId)
@@ -285,14 +288,15 @@ namespace DMS.Repository.DAL
             List<DocumentFolderTree> lstFolders = new List<DocumentFolderTree>();
             foreach (var item in allFolders)
             {
-                if (item.ParentFolderId == parentFolderId)
+                if (item.parentId == parentFolderId)
                 {
-                    item.ChildFolders = GenerateFolderTree(allFolders, item.FolderId);
+                    item.nodes = GenerateFolderTree(allFolders, item.id);
                     lstFolders.Add(item);
-                }    
+                }
             }
             return lstFolders;
         }
+
 
     }
 }

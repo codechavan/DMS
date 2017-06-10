@@ -18,6 +18,7 @@
     <link href="Content/bootstrap-theme.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="StyleSection" runat="server" />
     <link href="Content/Dashboard.css" rel="stylesheet" />
+    <link href="CustomAlert/CustomeAlert.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -36,7 +37,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <span><a class="navbar-brand" href="/">Slidebar</a></span>
+                <span><a class="navbar-brand" href="Dashboard.aspx">DMS</a></span>
             </div>
 
             <div class="navbar-collapse collapse">
@@ -44,37 +45,34 @@
                 <div class="container-fluid">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i>Services <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gear"></i> Admin<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/">Carwashes</a></li>
-                                <li><a href="/">Lapdances</a></li>
-                                <li><a href="/">Musicals</a></li>
-                                <li><a href="/">Tutorials</a></li>
-                                <li><a href="/">Catering</a></li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="LnkBtnAdminUserRoles" PostBackUrl="~/Roles.aspx"><i class="fa fa-tasks"></i> User Roles</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="LnkBtnAdminUsers"><i class="fa fa-user"></i> Users</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="LnkBtnAdminConfigurations" PostBackUrl="~/Dashboard.aspx"><i class="fa fa-gears"></i> Configurations</asp:LinkButton>
+                                </li>
                             </ul>
                         </li>
-
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags"></i>Products <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Profile <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/">Books</a></li>
-                                <li><a href="/">Leaflets</a></li>
-                                <li><a href="/">CDs</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Merchandise</li>
-                                <li><a href="/">Towels</a></li>
-                                <li><a href="/">Flags</a></li>
-                                <li><a href="/">Coffee Mugs</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>Profile <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/"><i class="glyphicon glyphicon-user"></i>Profile</a></li>
-                                <li><a href="/"><i class="glyphicon glyphicon-plus"></i>Account</a></li>
-                                <li><a href="/"><i class="glyphicon glyphicon-cog"></i>Settings</a></li>
-                                <li><a href="/"><i class="glyphicon glyphicon-comment"></i>Notifications</a></li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="LnkBtnUserProfile" ><i class="glyphicon glyphicon-user"></i> Profile</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="LnkBtnProfileSetting"><i class="glyphicon glyphicon-cog"></i> Settings</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="LnkBtnProfileNotification"><i class="glyphicon glyphicon-comment"></i> Notifications</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="LnkBtnLogout" OnClick="LnkBtnLogout_Click" ><i class="glyphicon glyphicon-log-out"></i> Logout</asp:LinkButton>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -88,57 +86,23 @@
             <!-- Sidebar -->
             <div id="slidebar-white" class="slidebar-nav">
                 <nav id="navbar-white1" class="navbar navbar-default" role="navigation">
-                    <ul class="nav navbar-nav">
-                        <li class="hidden-xs"><a class="navbar-brand" href="/">Slidebar</a></li>
-                        <li class="sidebar-form">
-                            <%--<form class="input-group" border="0" id="af" name="af" role="search" action="/archive.php">
+                    <br />
+                    <div class="sidebar-form">
+                        <%--<form class="input-group" border="0" id="af" name="af" role="search" action="/archive.php">
                                 <input type="text" class="form-control" id="aa" name="aa" placeholder="Search">
                                 <span class="input-group-btn">
                                     <button type="submit" class="btn btn-md" id="as" name="as" value="Go"><i class="glyphicon glyphicon-search"></i></button>
                                 </span>
                             </form>--%>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                </span>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i>Services <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/">Carwashes</a></li>
-                                <li><a href="/">Lapdances</a></li>
-                                <li><a href="/">Musicals</a></li>
-                                <li><a href="/">Tutorials</a></li>
-                                <li><a href="/">Catering</a></li>
-                            </ul>
-                        </li>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags"></i>Products <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/">Books</a></li>
-                                <li><a href="/">Leaflets</a></li>
-                                <li><a href="/">CDs</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Merchandise</li>
-                                <li><a href="/">Towels</a></li>
-                                <li><a href="/">Flags</a></li>
-                                <li><a href="/">Coffee Mugs</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>Profile <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/"><i class="glyphicon glyphicon-user"></i>Profile</a></li>
-                                <li><a href="/"><i class="glyphicon glyphicon-plus"></i>Account</a></li>
-                                <li><a href="/"><i class="glyphicon glyphicon-cog"></i>Settings</a></li>
-                                <li><a href="/"><i class="glyphicon glyphicon-comment"></i>Notifications</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <div id="treeview-checkable"></div>
                 </nav>
                 <!--/.navbar -->
             </div>
@@ -147,6 +111,7 @@
 
             <!-- Page Content -->
             <main id="page-wrapper6">
+                    
       <asp:ContentPlaceHolder ID="ContentSection" runat="server">
                 </asp:ContentPlaceHolder>
     </main>
@@ -157,11 +122,15 @@
         <%-- Script Section --%>
         <!--<: Scripts.Render("~/bundles/jQuery")  %>-->
         <script src="Scripts/jquery-2.1.1.js"></script>
+        <script src="Scripts/Common.js"></script>
         <script src="Scripts/bootstrap.js"></script>
+        <script src="Scripts/bootstrap-treeview.js"></script>
+        <script src="CustomAlert/CustomeAlert.js"></script>
         <script>
             // add to footer
             $("#menu-toggle").click(function (e) {
-                e.preventDefault(); $("#wrapper").toggleClass("toggled");
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
                 if (!$("#wrapper").hasClass("toggled")) {
                     $('#folderMenuIcon').removeClass("fa-folder");
                     $('#folderMenuIcon').addClass("fa-folder-open");
@@ -170,9 +139,57 @@
                     $('#folderMenuIcon').removeClass("fa-folder-open");
                 }
             });
-            
-        </script>
 
+        </script>
+        <script>
+            var $checkableTree = null;
+            var treeData = null;
+            function GenerateTree(folders) {
+                treeData = folders;
+
+                $checkableTree = $('#treeview-checkable').treeview({
+                    data: treeData,
+                    showIcon: true,
+                    highlightSelected: true,
+                    showCheckbox: false,
+                    //onNodeChecked: function (event, node) {
+                    //    if (node.href != 0) {
+                    //        selectedMenuId.push(node.href);
+                    //    }
+                    //    if (node.nodes) {
+                    //        CheckChildNodes('#treeview-checkable', node.nodeId)
+                    //    }
+                    //    if (node.parentId) {
+                    //        UpdateParentTreeNodeCheckBox('#treeview-checkable', node.parentId)
+                    //    }
+                    //},
+                    onNodeSelected: function (event, node) {
+                        ShowMessage('Selected');
+                        console.log(node);
+                        // Your logic goes here
+                    }
+                });
+            }
+            function CreateView() {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'text',
+                    url: 'Dashboard.aspx/GetFolders',
+                    cache: false,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        GenerateTree(data.d);
+                    },
+                    error: ServiceError,
+                    complete: HideLoader
+                });
+            }
+
+            $(document).ready(function () {
+                CreateView();
+            });
+        </script>
         <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
     </form>
 </body>

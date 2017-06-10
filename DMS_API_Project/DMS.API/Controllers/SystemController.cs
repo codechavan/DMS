@@ -28,7 +28,7 @@ namespace DMS.API.Controllers
         [HttpPost]
         public IList<DmsSystem> GetSystemDropdown()
         {
-            using (SystemBL sysBL = new SystemBL(ConfigurationManager.ConnectionStrings[0].Name))
+            using (SystemBL sysBL = new SystemBL(WebConstants.DMSConnectionStringName))
             {
                 return sysBL.GetSystem(null, null).LstData;
             }
@@ -74,7 +74,7 @@ namespace DMS.API.Controllers
             FunctionReturnStatus result = null;
             try
             {
-                using (SystemBL systemBL = new SystemBL(ConfigurationManager.ConnectionStrings[0].Name))
+                using (SystemBL systemBL = new SystemBL(WebConstants.DMSConnectionStringName))
                 {
                     result = systemBL.AddDmsSystem(system, dmsUser, userRole);
                 }

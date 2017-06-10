@@ -38,6 +38,7 @@ namespace DMS.UI
         public const string CreateDmsSystemAPI = "api/System/CreateDmsSystem";
         public const string LogonAPI = "api/UserAccount/Login";
         public const string GetUserListAPI = "api/UserAccount/GetUserList";
+        public const string GetDocumentFolderTreeAPI = "api/DocumentFolder/GetDocumentFolderTree";
 
         #endregion
 

@@ -13,7 +13,7 @@ using System.Data;
 
 namespace DMS.Repository.SQL
 {
-    public class SQLScallerFunctions
+    public class SQLScallerFunctions : IDisposable
     {
         Logger logger = null;
         protected string ConnectionStringName;
@@ -215,5 +215,10 @@ namespace DMS.Repository.SQL
             }
         }
 
+
+        public void Dispose()
+        {
+            logger = null;
+        }
     }
 }

@@ -18,8 +18,8 @@
 --	d. Unlock user		- DONE			- DONE
 --	e. Login			- DONE			- DONE			-DONE
 --	f. List				- DONE			- DONE
---	g. Generate Token	- DONE			- DONE
---	h. AuthenticateToken- DONE			- DONE
+--	g. Generate Token	- DONE			- DONE			-DONE
+--	h. AuthenticateToken- DONE			- DONE			-DONE
 
 --4. System Parameter / System Parameter Values
 --	a. Update			- DONE			- DONE
