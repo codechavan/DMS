@@ -124,7 +124,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters, PagingDetails pageDetail)
+        public override DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -134,9 +134,9 @@ namespace DMS.Repository.SQL
                 {
                     searchParameters = new DocumentSearchParameter();
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
 
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
@@ -146,10 +146,10 @@ namespace DMS.Repository.SQL
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.SystemId, DbType.Int64, searchParameters.SystemId);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.ParentFolderId, DbType.Int64, searchParameters.ParentFolderId);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.PageIndex, DbType.Int32, searchParameters.PageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.PageSize, DbType.Int32, searchParameters.PageDetail.PageSize);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.WhereCondition, DbType.String, GetDocumentObjectsParameterString(searchParameters));
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.OrderBy, DbType.String, GetDocumentObjectOrderBy(pageDetail.OrderBy));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Documents_Parameters.OrderBy, DbType.String, GetDocumentObjectOrderBy(searchParameters.PageDetail.OrderBy));
 
                 DocumentSearchData LstData = new DocumentSearchData();
                 List<Document> lstFolders = null;
@@ -165,7 +165,7 @@ namespace DMS.Repository.SQL
                     }
                 }
                 LstData.LstData = lstFolders;
-                LstData.PageDetail = pageDetail;
+                LstData.SearchParameter = searchParameters;
 
                 return LstData;
             }
@@ -180,7 +180,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override List<DocumentFolderTree> GetDocumentFolderTree(long systemId)
+        public override List<DocumentFolderTree> GetDocumentFolderTree(DocumentFolderTreeSearchParameters searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -190,12 +190,26 @@ namespace DMS.Repository.SQL
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_DocumentFoldersTree);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFoldersTree_Parameters.SystemId, DbType.Int64, systemId);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFoldersTree_Parameters.SystemId, DbType.Int64, searchParameters.SystemId);
 
-                List<DocumentFolderTree> lstFolders = null;
+                List<DocumentFolderTree> lstFolders = new List<DocumentFolderTree>();
                 using (IDataReader objReader = database.ExecuteReader(dbCommand))
                 {
-                    lstFolders = GenerateFolderTree(CreateDocumentFolderTree(objReader), 0);
+                    List<DocumentFolderTree> lst = GenerateFolderTree(CreateDocumentFolderTree(objReader,searchParameters.SelectedFolderId), 0);
+
+                    //Add default root folder, all folder with empty/0 parentid will get bind to this.
+                    DocumentFolderTree folder = new DocumentFolderTree();
+                    folder.id = -1;
+                    folder.text = "Root";
+                    folder.parentId = -1;
+                    folder.nodes = lst;
+                    if (searchParameters.SelectedFolderId < 1)
+                    {
+                        folder.state = new TreeState();
+                        folder.state.selected = true;
+                    }
+                    lstFolders.Add(folder);
+
                 }
 
                 return lstFolders;

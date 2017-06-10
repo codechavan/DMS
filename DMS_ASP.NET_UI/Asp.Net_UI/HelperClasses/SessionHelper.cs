@@ -10,9 +10,34 @@ namespace DMS.UI
     {
         //Logger logger = null;
 
-        private const string UserSessionName = "DMS.API.UserSession";
+        public SessionHelper()
+        {
+            //logger = new Logger("DMS.API.HelperClasses.SessionHelper");
+        }
 
-        private const string UserLogonTokenSessionName = "DMS.API.UserLogonTokenSession";
+        private const string SelectedFolderIdSessionName = "DMS.UI.SelectedFolderId";
+        public static long SelectedFolderId
+        {
+            get
+            {
+                long folderId = 0;
+                if (HttpContext.Current.Session[SelectedFolderIdSessionName] != null)
+                {
+                    long.TryParse(HttpContext.Current.Session[SelectedFolderIdSessionName].ToString(), out folderId);
+                }
+                return folderId;
+            }
+            set
+            {
+                HttpContext.Current.Session[SelectedFolderIdSessionName] = value;
+            }
+        }
+
+        #region User Session
+
+        private const string UserSessionName = "DMS.UI.UserSession";
+
+        private const string UserLogonTokenSessionName = "DMS.UI.UserLogonTokenSession";
 
         public static DmsUser LogonUser
         {
@@ -36,11 +61,6 @@ namespace DMS.UI
                 }
                 return HttpContext.Current.Session[UserLogonTokenSessionName].ToString();
             }
-        }
-
-        public SessionHelper()
-        {
-            //logger = new Logger("DMS.API.HelperClasses.SessionHelper");
         }
 
         public static FunctionReturnStatus CreateUserSession(DmsUser user, string logonToken)
@@ -68,5 +88,7 @@ namespace DMS.UI
                 throw;
             }
         }
+
+        #endregion
     }
 }

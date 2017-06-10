@@ -39,7 +39,9 @@ namespace DMS.UI
         public const string LogonAPI = "api/UserAccount/Login";
         public const string GetUserListAPI = "api/UserAccount/GetUserList";
         public const string GetDocumentFolderTreeAPI = "api/DocumentFolder/GetDocumentFolderTree";
-
+        public const string GetDocumentObjectListAPI = "api/DocumentFolder/GetDocumentObjectList";
+        public const string CreateFolderAPI = "api/DocumentFolder/CreateFolder";
+        
         #endregion
 
 

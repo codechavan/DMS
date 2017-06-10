@@ -71,7 +71,7 @@ BEGIN
 				@iRowEnd = ( @iRowStart - 1 ) + @iPageSize,  
 				@iRowStart = ( CASE WHEN @iRowStart <= 0 THEN 1 ELSE @iRowStart END ),  
 				@iRowEnd = ( CASE WHEN @iRowEnd <= 0 THEN 2147483647 ELSE @iRowEnd END ),     
-				@strOrderBy = ( CASE WHEN @strOrderBy = '' THEN '[DocumentFileName]' ELSE @strOrderBy END )  
+				@strOrderBy = ( CASE WHEN @strOrderBy = '' THEN '[Name]' ELSE @strOrderBy END )  
 	
 	
 		SELECT	@strObject = '#DocumentObjects'

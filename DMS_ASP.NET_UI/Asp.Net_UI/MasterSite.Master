@@ -45,7 +45,7 @@
                 <div class="container-fluid">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gear"></i> Admin<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gear"></i>Admin<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <asp:LinkButton runat="server" ID="LnkBtnAdminUserRoles" PostBackUrl="~/Roles.aspx"><i class="fa fa-tasks"></i> User Roles</asp:LinkButton>
@@ -59,10 +59,10 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Profile <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>Profile <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <asp:LinkButton runat="server" ID="LnkBtnUserProfile" ><i class="glyphicon glyphicon-user"></i> Profile</asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="LnkBtnUserProfile"><i class="glyphicon glyphicon-user"></i> Profile</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton runat="server" ID="LnkBtnProfileSetting"><i class="glyphicon glyphicon-cog"></i> Settings</asp:LinkButton>
@@ -71,7 +71,7 @@
                                     <asp:LinkButton runat="server" ID="LnkBtnProfileNotification"><i class="glyphicon glyphicon-comment"></i> Notifications</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton runat="server" ID="LnkBtnLogout" OnClick="LnkBtnLogout_Click" ><i class="glyphicon glyphicon-log-out"></i> Logout</asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="LnkBtnLogout" OnClick="LnkBtnLogout_Click"><i class="glyphicon glyphicon-log-out"></i> Logout</asp:LinkButton>
                                 </li>
                             </ul>
                         </li>
@@ -111,10 +111,10 @@
 
             <!-- Page Content -->
             <main id="page-wrapper6">
-                    
-      <asp:ContentPlaceHolder ID="ContentSection" runat="server">
+                <asp:ContentPlaceHolder ID="ContentSection" runat="server">
                 </asp:ContentPlaceHolder>
-    </main>
+                
+            </main>
         </div>
         <!-- /#wrapper -->
 
@@ -164,9 +164,16 @@
                     //    }
                     //},
                     onNodeSelected: function (event, node) {
-                        ShowMessage('Selected');
-                        console.log(node);
+                        //ShowMessage('Selected');
+                        //console.log(node);
+                        //
                         // Your logic goes here
+                        //console.log($('#hdnApplicationUrl').val() + 'OpenFolder.aspx');
+                        var qstr = '';
+                        if (node.id > 0) {
+                            qstr = '?id=' + node.id;
+                        }
+                        window.location = $('#hdnApplicationUrl').val() + 'OpenFolder.aspx' + qstr;
                     }
                 });
             }
@@ -190,6 +197,7 @@
                 CreateView();
             });
         </script>
+        <asp:HiddenField  runat="server" ID="hdnApplicationUrl" />
         <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
     </form>
 </body>

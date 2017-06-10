@@ -26,12 +26,29 @@ namespace DMS.API.Controllers
         #endregion
 
         [HttpPost]
-        public IList<DocumentFolderTree> GetDocumentFolderTree()
+        public IList<DocumentFolderTree> GetDocumentFolderTree(DocumentFolderTreeSearchParameters searchParameters)
         {
-            long systemId = 1;
             using (DocumentFolderBL sysBL = new DocumentFolderBL(WebConstants.DMSConnectionStringName))
             {
-                return sysBL.GetDocumentFolderTree(systemId);
+                return sysBL.GetDocumentFolderTree(searchParameters);
+            }
+        }
+
+        [HttpPost]
+        public DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters)
+        {
+            using (DocumentFolderBL sysBL = new DocumentFolderBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetDocumentObjectList(searchParameters);
+            }
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus CreateFolder(DocumentFolder folder)
+        {
+            using (DocumentFolderBL sysBL = new DocumentFolderBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.CreateFolder(folder);
             }
         }
 

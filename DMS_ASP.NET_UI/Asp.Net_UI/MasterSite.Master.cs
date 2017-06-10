@@ -19,6 +19,10 @@ namespace DMS.UI
                 Session.Abandon();
                 Response.Redirect("Login.aspx");
             }
+            if (!IsPostBack)
+            {
+                hdnApplicationUrl.Value = HttpRuntime.AppDomainAppVirtualPath;
+            }
         }
         #endregion
 

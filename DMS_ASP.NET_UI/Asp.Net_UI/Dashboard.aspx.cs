@@ -69,7 +69,10 @@ namespace DMS.UI
             {
                 return null;
             }
-            return APIMethods.GetDocumentFolderTree(SessionHelper.LogonUser.SystemId);
+            DocumentFolderTreeSearchParameters searchParameters = new DocumentFolderTreeSearchParameters();
+            searchParameters.SystemId = SessionHelper.LogonUser.SystemId;
+            searchParameters.SelectedFolderId = SessionHelper.SelectedFolderId;
+            return APIMethods.GetDocumentFolderTree(searchParameters);
         }
 
         protected void gvDocList_PageIndexChanging(object sender, GridViewPageEventArgs e)

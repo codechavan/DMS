@@ -70,11 +70,11 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptSection" runat="server">
-    <script>
+    <%--<script>
         $(document).ready(function () {
             $('#offcanvasleft').click(function () {
                 $('#sidebarLeft').toggleClass('active');
             });
         });
-    </script>
+    </script>--%>
 </asp:Content>

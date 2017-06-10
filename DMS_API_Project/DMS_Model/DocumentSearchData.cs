@@ -12,6 +12,6 @@ namespace DMS.Model
         
         public IList<Document> LstData { get; set; }
 
-        public PagingDetails PageDetail { get; set; }
+        public DocumentSearchParameter SearchParameter { get; set; }
     }
 }

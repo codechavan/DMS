@@ -96,17 +96,55 @@ namespace DMS.UI
             }
         }
 
-        public static IList<DocumentFolderTree> GetDocumentFolderTree(long systemId)
+        public static IList<DocumentFolderTree> GetDocumentFolderTree(DocumentFolderTreeSearchParameters searchParameters)
         {
             try
             {
-                dynamic prmObj = new ExpandoObject();
-                prmObj.systemId = systemId;
-
-                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.GetDocumentFolderTreeAPI, null);
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.GetDocumentFolderTreeAPI, searchParameters);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return JsonConvert.DeserializeObject<IList<DocumentFolderTree>>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException("Error in communication to API");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public static DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters)
+        {
+            try
+            {
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.GetDocumentObjectListAPI, searchParameters);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<DocumentSearchData>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException("Error in communication to API");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static FunctionReturnStatus CreateFolder(DocumentFolder folder)
+        {
+            try
+            {
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.CreateFolderAPI, folder);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<FunctionReturnStatus>(responseMessage.Content.ReadAsStringAsync().Result);
                 }
                 else
                 {

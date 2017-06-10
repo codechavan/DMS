@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace DMS.Model
 {
-    public class DocumentSearchParameter
+    public class DocumentFolderTreeSearchParameters
     {
         public long SystemId { get; set; }
-        public long ParentFolderId { get; set; }
-        public string ObjectName { get; set; }
-        public PagingDetails PageDetail { get; set; }
+        public long SelectedFolderId { get; set; }
     }
 }

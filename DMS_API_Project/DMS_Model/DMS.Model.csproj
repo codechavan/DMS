@@ -48,6 +48,7 @@
     <Compile Include="DocumentAccess.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="DocumentFileHistory.cs" />
+    <Compile Include="DocumentFolderTreeSearchParameters.cs" />
     <Compile Include="DocumentSearchData.cs" />
     <Compile Include="DocumentSearchParameter.cs" />
     <Compile Include="DocumentFolderTree.cs" />

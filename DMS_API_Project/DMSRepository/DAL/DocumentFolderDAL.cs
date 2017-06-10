@@ -24,9 +24,9 @@ namespace DMS.Repository.DAL
 
         public abstract DocumentFolderSearchData GetFolders(DocumentFolderSearchParameter searchParameters, PagingDetails pageDetail);
 
-        public abstract DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters, PagingDetails pageDetail);
+        public abstract DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters);
 
-        public abstract List<DocumentFolderTree> GetDocumentFolderTree(long systemId);
+        public abstract List<DocumentFolderTree> GetDocumentFolderTree(DocumentFolderTreeSearchParameters searchParameters);
 
         protected string GetDocumentObjectsParameterString(DocumentSearchParameter searchParameters)
         {
@@ -106,7 +106,7 @@ namespace DMS.Repository.DAL
                 isnull = false;
                 folder = new Document();
                 folder.ObjectId = objReader[Views.usp_Get_Documents.ObjectId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_Documents.ObjectId]) : 0;
-                folder.ObjectType =(DocumentObjectType) (objReader[Views.usp_Get_Documents.ObjectType] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_Documents.ObjectType]) : 1);
+                folder.ObjectType = (DocumentObjectType)(objReader[Views.usp_Get_Documents.ObjectType] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_Documents.ObjectType]) : 1);
                 folder.Name = objReader[Views.usp_Get_Documents.Name] != DBNull.Value ? Convert.ToString(objReader[Views.usp_Get_Documents.Name]) : null;
                 folder.IsDeleted = objReader[Views.usp_Get_Documents.IsDeleted] != DBNull.Value ? Convert.ToBoolean(objReader[Views.usp_Get_Documents.IsDeleted]) : false;
 
@@ -259,24 +259,22 @@ namespace DMS.Repository.DAL
         }
 
 
-        protected List<DocumentFolderTree> CreateDocumentFolderTree(IDataReader objReader)
+        protected List<DocumentFolderTree> CreateDocumentFolderTree(IDataReader objReader, long selectedFolderId)
         {
             List<DocumentFolderTree> lstFolders = new List<DocumentFolderTree>();
             DocumentFolderTree folder;
-
-            //Add default root folder, all folder with empty/0 parentid will get bind to this.
-            folder = new DocumentFolderTree();
-            folder.id = -1;
-            folder.text = "Root";
-            folder.parentId = 0;
-            lstFolders.Add(folder);
-
             while (objReader.Read())
             {
                 folder = new DocumentFolderTree();
                 folder.id = objReader[Views.usp_Get_DocumentFoldersTree.FolderId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.FolderId]) : 0;
                 folder.text = objReader[Views.usp_Get_DocumentFoldersTree.FolderName] != DBNull.Value ? Convert.ToString(objReader[Views.usp_Get_DocumentFoldersTree.FolderName]) : null;
                 folder.parentId = objReader[Views.usp_Get_DocumentFoldersTree.ParentId] != DBNull.Value ? Convert.ToInt64(objReader[Views.usp_Get_DocumentFoldersTree.ParentId]) : 0;
+                folder.state = new TreeState();
+                if (folder.id == selectedFolderId)
+                {
+                    folder.state.selected = true;
+                    folder.state.expanded = true;
+                }
                 lstFolders.Add(folder);
             }
 
@@ -285,12 +283,23 @@ namespace DMS.Repository.DAL
 
         protected List<DocumentFolderTree> GenerateFolderTree(List<DocumentFolderTree> allFolders, long parentFolderId)
         {
-            List<DocumentFolderTree> lstFolders = new List<DocumentFolderTree>();
+            List<DocumentFolderTree> lstFolders = null;
             foreach (var item in allFolders)
             {
                 if (item.parentId == parentFolderId)
                 {
                     item.nodes = GenerateFolderTree(allFolders, item.id);
+                    if (lstFolders == null)
+                    {
+                        lstFolders = new List<DocumentFolderTree>();
+                    }
+                    if (item.nodes != null)
+                    {
+                        if (item.nodes.Any(cus => cus.state.expanded == true))
+                        {
+                            item.state.expanded = true;
+                        }
+                    }
                     lstFolders.Add(item);
                 }
             }

@@ -127,11 +127,11 @@ namespace DMS.BL
             }
         }
 
-        public IList<DocumentFolderTree> GetDocumentFolderTree(long systemId)
+        public IList<DocumentFolderTree> GetDocumentFolderTree(DocumentFolderTreeSearchParameters searchParameters)
         {
             try
             {
-                return DocumentFolderRepository.GetDocumentFolderTree(systemId);
+                return DocumentFolderRepository.GetDocumentFolderTree(searchParameters);
             }
             catch (Exception ex)
             {
@@ -140,19 +140,11 @@ namespace DMS.BL
             }
         }
 
-        public DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters, PagingDetails pageDetail)
+        public DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters)
         {
             try
             {
-                //if (searchParameters == null)
-                //{
-                //    return null;
-                //}
-                //if (searchParameters.SystemId <= 0)
-                //{
-                //    return null;
-                //}
-                return DocumentFolderRepository.GetDocumentObjectList(searchParameters, pageDetail);
+                return DocumentFolderRepository.GetDocumentObjectList(searchParameters);
             }
             catch (Exception ex)
             {
