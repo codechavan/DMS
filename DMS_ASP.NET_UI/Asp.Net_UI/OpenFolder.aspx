@@ -1,92 +1,119 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSite.Master" AutoEventWireup="true" CodeBehind="OpenFolder.aspx.cs" Inherits="DMS.UI.OpenFolder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="StyleSection" runat="server">
-    <style>
-        .pagination-ys {
-            /*display: inline-block;*/
-            padding-left: 0;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-
-            .pagination-ys table > tbody > tr > td {
-                display: inline;
-            }
-
-                .pagination-ys table > tbody > tr > td > a,
-                .pagination-ys table > tbody > tr > td > span {
-                    position: relative;
-                    float: left;
-                    padding: 8px 12px;
-                    line-height: 1.42857143;
-                    text-decoration: none;
-                    color: #dd4814;
-                    background-color: #ffffff;
-                    border: 1px solid #dddddd;
-                    margin-left: -1px;
-                }
-
-                .pagination-ys table > tbody > tr > td > span {
-                    position: relative;
-                    float: left;
-                    padding: 8px 12px;
-                    line-height: 1.42857143;
-                    text-decoration: none;
-                    margin-left: -1px;
-                    z-index: 2;
-                    color: #aea79f;
-                    background-color: #f5f5f5;
-                    border-color: #dddddd;
-                    cursor: default;
-                }
-
-                .pagination-ys table > tbody > tr > td:first-child > a,
-                .pagination-ys table > tbody > tr > td:first-child > span {
-                    margin-left: 0;
-                    border-bottom-left-radius: 4px;
-                    border-top-left-radius: 4px;
-                }
-
-                .pagination-ys table > tbody > tr > td:last-child > a,
-                .pagination-ys table > tbody > tr > td:last-child > span {
-                    border-bottom-right-radius: 4px;
-                    border-top-right-radius: 4px;
-                }
-
-                .pagination-ys table > tbody > tr > td > a:hover,
-                .pagination-ys table > tbody > tr > td > span:hover,
-                .pagination-ys table > tbody > tr > td > a:focus,
-                .pagination-ys table > tbody > tr > td > span:focus {
-                    color: #97310e;
-                    background-color: #eeeeee;
-                    border-color: #dddddd;
-                }
-    </style>
+    <link href="Content/grid-paging.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentSection" runat="server">
     <asp:HiddenField runat="server" ID="hdnFolderId" />
-    <button id="btnAddFolder" class="btn btn-default" type="button"><i class="fa fa-plus"></i>New Folder</button>
-
-    <div style="display: inline-block" runat="server" id="pnlFileUpload">
-        <button id="btnAddFile" class="btn btn-default" type="button"><i class="fa fa-plus"></i>New File</button>
-        <asp:FileUpload runat="server" ID="FileUpload" ClientIDMode="Static" AllowMultiple="false" Style="display: none" onchange="OnFileSelected()" />
-        <asp:Button runat="server" ID="btnSaveFile" OnClick="btnSaveFile_Click" Style="display: none" ClientIDMode="Static" />
-    </div>
-
-    <asp:GridView runat="server" ID="grdObjectList" ShowHeader="false" Width="100%" AllowCustomPaging="true" AutoGenerateColumns="false" AllowPaging="true" PageSize="5" OnPageIndexChanging="grdObjectList_PageIndexChanging" OnRowDataBound="grdObjectList_RowDataBound">
-        <Columns>
-            <asp:TemplateField>
-                <ItemTemplate>
-                    <a id="LnkObjectName" runat="server"></a>
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-        <PagerStyle CssClass="pagination-ys" HorizontalAlign="Right" />
-    </asp:GridView>
-
-
-
-
+    <div class="container">
+        <div class="'row">
+            <button id="btnAddFolder" class="btn btn-default" type="button"><i class="fa fa-plus"></i>New Folder</button>
+            <div style="display: inline-block" runat="server" id="pnlFileUpload">
+                <button id="btnAddFile" class="btn btn-default" type="button"><i class="fa fa-plus"></i>New File</button>
+                <asp:FileUpload runat="server" ID="FileUpload" ClientIDMode="Static" AllowMultiple="false" Style="display: none" onchange="OnFileSelected()" />
+                <asp:Button runat="server" ID="btnSaveFile" OnClick="btnSaveFile_Click" Style="display: none" ClientIDMode="Static" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <asp:GridView runat="server" ID="grdObjectList" ShowHeader="false" CellPadding="10" DataKeyNames="ObjectId" CellSpacing="2" Width="100%" AllowCustomPaging="true" AutoGenerateColumns="false" AllowPaging="true" PageSize="5" OnPageIndexChanging="grdObjectList_PageIndexChanging" OnRowDataBound="grdObjectList_RowDataBound" OnRowCommand="grdObjectList_RowCommand">
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <a id="LnkObjectName" runat="server"></a>
+                                <asp:LinkButton runat="server" ID="LnkFileName" CommandName="OpenFile"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <PagerStyle CssClass="pagination-ys" HorizontalAlign="Right" />
+                </asp:GridView>
+            </div>
+            <div class="col-xs-6" id="pnlProperties" runat="server">
+                <div class="row" id="pnlProperty1" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName1" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue1" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty2" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName2" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue2" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty3" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName3" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue3" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty4" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName4" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue4" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty5" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName5" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue5" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty6" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName6" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue6" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty7" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName7" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue7" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty8" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName8" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue8" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty9" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName9" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue9" />
+                    </div>
+                </div>
+                <div class="row" id="pnlProperty10" runat="server">
+                    <div class="col-xs-8 col-sm-6">
+                        <asp:Label Text="" ID="lblPropertyName10" runat="server" />
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <asp:TextBox runat="server" ID="txtPropertyValue10" />
+                    </div>
+                </div>
+                <div class="row">
+                    <button runat="server" id="btnUpdateFileProperties" onserverclick="btnUpdateFileProperties_ServerClick"><i class="fa fa-save"></i>Update</button>
+                </div>
+            </div>
+        </div>
     <!-- Modal -->
     <div class="modal fade" id="modalFolder" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">

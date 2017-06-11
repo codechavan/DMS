@@ -21,7 +21,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus CreateUpdateDocumentPropertiesNames(DocumentPropertiesNames propertiesName);
 
-        public abstract DocumentPropertiesNames GetDocumentPropertiesNames(DocumentPropertiesNamesSearchParamater searchParameters, PagingDetails pageDetail);
+        public abstract DocumentPropertiesNames GetDocumentPropertiesNames(DocumentPropertiesNamesSearchParamater searchParameters);
 
 
         protected string GetDocumentPropertiesNamesSearchParameterString(DocumentPropertiesNamesSearchParamater searchParameters)

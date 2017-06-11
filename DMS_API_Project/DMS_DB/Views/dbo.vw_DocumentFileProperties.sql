@@ -52,6 +52,6 @@
 			ON DocFilePropName.[SystemId] = DocFile.[SystemId]
 		INNER JOIN [dbo].[Users] USC
 			ON DocFileProp.[DocumentFilePropertyCreatedBy] = USC.UserId
-		INNER JOIN [dbo].[Users] USM
+		LEFT JOIN [dbo].[Users] USM
 			ON DocFileProp.[DocumentFilePropertyModifiedBy] = USM.UserId
 )

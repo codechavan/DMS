@@ -84,6 +84,7 @@
     <Content Include="Content\Dashboard.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\grid-paging.css" />
     <Content Include="Content\register.css" />
     <Content Include="Content\login.css" />
     <Content Include="CustomAlert\CustomeAlert.css" />

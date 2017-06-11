@@ -198,5 +198,65 @@ namespace DMS.UI
             }
         }
 
+        public static DocumentPropertiesNames GetDocumentPropertiesNames(DocumentPropertiesNamesSearchParamater searchParameters)
+        {
+            try
+            {
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.GetDocumentPropertiesNamesAPI, searchParameters);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<DocumentPropertiesNames>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException(APIFailureMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DocumentProperties GetDocumentProperties(DocumentPropertiesSearchParameter searchParameters)
+        {
+            try
+            {
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.GetDocumentPropertiesAPI, searchParameters);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<DocumentProperties>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException(APIFailureMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static FunctionReturnStatus UpdateDocumentProperties(DocumentProperties paramValue)
+        {
+            try
+            {
+                HttpResponseMessage responseMessage = RequestHelper.PostRequest(WebConstants.DMSAPIURL, WebConstants.UpdateDocumentPropertiesAPI, paramValue);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<FunctionReturnStatus>(responseMessage.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new HttpException(APIFailureMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

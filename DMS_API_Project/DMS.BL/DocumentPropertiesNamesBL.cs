@@ -62,7 +62,7 @@ namespace DMS.BL
             {
                 DocumentPropertiesNamesSearchParamater searchParameters = new DocumentPropertiesNamesSearchParamater();
                 searchParameters.SystemId = systemId;
-                return GetDocumentPropertiesNames(searchParameters, null);
+                return GetDocumentPropertiesNames(searchParameters);
             }
             catch (Exception ex)
             {
@@ -71,11 +71,11 @@ namespace DMS.BL
             }
         }
 
-        public DocumentPropertiesNames GetDocumentPropertiesNames(DocumentPropertiesNamesSearchParamater searchParameters, PagingDetails pageDetail)
+        public DocumentPropertiesNames GetDocumentPropertiesNames(DocumentPropertiesNamesSearchParamater searchParameters)
         {
             try
             {
-                return DocumentPropertiesNamesRepository.GetDocumentPropertiesNames(searchParameters, pageDetail);
+                return DocumentPropertiesNamesRepository.GetDocumentPropertiesNames(searchParameters);
             }
             catch (Exception ex)
             {

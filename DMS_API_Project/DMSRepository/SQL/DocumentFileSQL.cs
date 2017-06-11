@@ -58,29 +58,33 @@ namespace DMS.Repository.SQL
                     if (Convert.ToInt64(status.Data) > 0)
                     {
                         status.StatusType = StatusType.Success;
-                        if (properties != null)
+                        if (properties == null)
                         {
-                            properties.DocumentFileId = Convert.ToInt64(status.Data);
-                            using (DocumentPropertiesSQL docProp = new DocumentPropertiesSQL(ConnectionStringName))
+                            properties = new DocumentProperties();
+                            properties.PropertyValueCreatedBy = (file.ModifiedBy <= 0 ? file.CreatedBy : file.ModifiedBy);
+                            properties.PropertyValueModifiedBy = (file.ModifiedBy <= 0 ? file.CreatedBy : file.ModifiedBy);
+                        }
+                        properties.DocumentFileId = Convert.ToInt64(status.Data);
+                        using (DocumentPropertiesSQL docProp = new DocumentPropertiesSQL(ConnectionStringName))
+                        {
+                            FunctionReturnStatus propStatus = new FunctionReturnStatus();
+                            propStatus = docProp.UpdateDocumentProperties(database, properties, transaction);
+                            if (propStatus.StatusType == StatusType.Success)
                             {
-                                FunctionReturnStatus propStatus = new FunctionReturnStatus();
-                                propStatus = docProp.UpdateDocumentProperties(database, properties, transaction);
-                                if (propStatus.StatusType == StatusType.Success)
-                                {
-                                    transaction.Commit();
-                                }
-                                else
-                                {
-                                    status.StatusType = propStatus.StatusType;
-                                    status.Message = propStatus.Message;
-                                    transaction.Rollback();
-                                }
+                                transaction.Commit();
+                            }
+                            else
+                            {
+                                status.StatusType = propStatus.StatusType;
+                                status.Message = propStatus.Message;
+                                transaction.Rollback();
                             }
                         }
-                        else
-                        {
-                            transaction.Commit();
-                        }
+                        //}
+                        //else
+                        //{
+                        //    transaction.Commit();
+                        //}
                     }
                     else
                     {

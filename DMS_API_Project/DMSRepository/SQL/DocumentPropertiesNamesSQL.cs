@@ -77,7 +77,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override DocumentPropertiesNames GetDocumentPropertiesNames(DocumentPropertiesNamesSearchParamater searchParameters, PagingDetails pageDetail)
+        public override DocumentPropertiesNames GetDocumentPropertiesNames(DocumentPropertiesNamesSearchParamater searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -91,9 +91,9 @@ namespace DMS.Repository.SQL
                 {
                     searchParameters = new DocumentPropertiesNamesSearchParamater();
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
 
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentPropertiesName_Parameters.SystemId, DbType.Int64, searchParameters.SystemId);

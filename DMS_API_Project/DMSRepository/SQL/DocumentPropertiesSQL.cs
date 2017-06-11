@@ -93,15 +93,15 @@ namespace DMS.Repository.SQL
 
             database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.DocumentFileId, DbType.Int64, paramValue.DocumentFileId);
             database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field1Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field2Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field3Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field4Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field5Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field6Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field7Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field8Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field9Value, DbType.String, paramValue.Field1Value);
-            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field10Value, DbType.String, paramValue.Field1Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field2Value, DbType.String, paramValue.Field2Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field3Value, DbType.String, paramValue.Field3Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field4Value, DbType.String, paramValue.Field4Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field5Value, DbType.String, paramValue.Field5Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field6Value, DbType.String, paramValue.Field6Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field7Value, DbType.String, paramValue.Field7Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field8Value, DbType.String, paramValue.Field8Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field9Value, DbType.String, paramValue.Field9Value);
+            database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.Field10Value, DbType.String, paramValue.Field10Value);
 
             database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Create_Update_DocumentFileProperties_Parameters.CreatedBy, DbType.Int64, (paramValue.PropertyValueModifiedBy <= 0 ? paramValue.PropertyValueCreatedBy : paramValue.PropertyValueModifiedBy));
 

@@ -44,6 +44,9 @@ namespace DMS.UI
         public const string GetSystemParameterValuesAPI = "api/SystemParameter/GetSystemParameterValues";
         public const string GetSystemParameterValueAPI = "api/SystemParameter/GetSystemParameterValue";
         public const string UploadFileAPI = "api/DocumentFile/UploadFile";
+        public const string GetDocumentPropertiesAPI = "api/DocumentFileProperties/GetDocumentProperties";
+        public const string GetDocumentPropertiesNamesAPI = "api/DocumentFileProperties/GetDocumentPropertiesNames";
+        public const string UpdateDocumentPropertiesAPI = "api/DocumentFileProperties/UpdateDocumentProperties";
         
         #endregion
 
