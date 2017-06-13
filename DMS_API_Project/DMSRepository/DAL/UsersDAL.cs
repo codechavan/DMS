@@ -20,7 +20,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus CreateUpdateUser(DmsUser user);
 
-        public abstract DmsUserSearchData GetUser(DmsUserSearchParameter searchParameters, PagingDetails pageDetail);
+        public abstract DmsUserSearchData GetUser(DmsUserSearchParameter searchParameters);
 
         public abstract FunctionReturnStatus Login(long systemId, string username, string password);
 

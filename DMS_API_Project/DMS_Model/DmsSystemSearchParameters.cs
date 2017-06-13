@@ -13,5 +13,7 @@ namespace DMS.Model
         public string SystemName { get; set; }
 
         public bool? IsActive { get; set; }
+
+        public PagingDetails PageDetail { get; set; }
     }
 }

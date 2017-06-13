@@ -36,9 +36,6 @@ namespace DMS.BL
             logger = new Logger("DMS.BL.SystemBL");
         }
 
-
-
-
         public FunctionReturnStatus AddDmsSystem(DmsSystem system, DmsUser dmsUser, DmsUserRole userRole)
         {
             try
@@ -119,7 +116,7 @@ namespace DMS.BL
             }
             DmsSystemSearchParameters searchParameters = new DmsSystemSearchParameters();
             searchParameters.SystemId = systemId;
-            var lstSys = GetSystem(searchParameters, null);
+            var lstSys = GetSystem(searchParameters);
             if (lstSys != null && lstSys.LstData != null)
             {
                 if (lstSys.LstData.Count == 1)
@@ -130,11 +127,11 @@ namespace DMS.BL
             return null;
         }
 
-        public DmsSystemSearchData GetSystem(DmsSystemSearchParameters searchParameters, PagingDetails pageDetail)
+        public DmsSystemSearchData GetSystem(DmsSystemSearchParameters searchParameters)
         {
             try
             {
-                return SystemRepository.GetSystem(searchParameters, pageDetail);
+                return SystemRepository.GetSystem(searchParameters);
             }
             catch (Exception ex)
             {
@@ -142,10 +139,6 @@ namespace DMS.BL
                 throw;
             }
         }
-
-
-
-
 
         public void Dispose()
         {

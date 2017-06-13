@@ -27,13 +27,102 @@ namespace DMS.API.Controllers
 
         #region Public Methods
         [HttpPost]
-        public DmsUserSearchData GetUserList(DmsUserSearchParameter searchParameter)
+        public DmsUserSearchData GetUsers(DmsUserSearchParameter searchParameter)
         {
             try
             {
                 using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
                 {
-                    return userBL.GetUser(searchParameter, null);
+                    return userBL.GetUser(searchParameter);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public DmsUser GetUser(long userId)
+        {
+            try
+            {
+                using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
+                {
+                    return userBL.GetUser(userId);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus CreateUser(DmsUser user)
+        {
+            try
+            {
+                using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
+                {
+                    user.CreatedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                    return userBL.CreateUser(user);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus UpdateUser(DmsUser user)
+        {
+            try
+            {
+                using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
+                {
+                    user.ModifiedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                    return userBL.UpdateUser(user);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus UnlockUser(DmsUser user)
+        {
+            try
+            {
+                using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
+                {
+                    user.ModifiedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                    return userBL.UnlockUser(user.SystemId, user.UserId, user.ModifiedBy);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus ChangePasword(DmsUser user)
+        {
+            try
+            {
+                using (UserBL userBL = new UserBL(WebConstants.DMSConnectionStringName))
+                {
+                    user.ModifiedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                    return userBL.ChangePasword(user.SystemId, user.UserId, user.Password, user.Password, user.ModifiedBy);
                 }
             }
             catch (Exception ex)

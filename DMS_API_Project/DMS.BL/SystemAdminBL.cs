@@ -119,7 +119,7 @@ namespace DMS.BL
                 }
                 SystemAdminSearchParameter searchParameters = new SystemAdminSearchParameter();
                 searchParameters.AdminId = adminId;
-                var lstUsers = GetSystemAdmin(searchParameters, null);
+                var lstUsers = GetSystemAdmin(searchParameters);
                 if (lstUsers != null && lstUsers.LstData != null)
                 {
                     if (lstUsers.LstData.Count == 1)
@@ -136,11 +136,11 @@ namespace DMS.BL
             }
         }
 
-        public SystemAdminSearchData GetSystemAdmin(SystemAdminSearchParameter searchParameters, PagingDetails pageDetail)
+        public SystemAdminSearchData GetSystemAdmin(SystemAdminSearchParameter searchParameters)
         {
             try
             {
-                return SystemAdminRepository.GetSystemAdmin(searchParameters, pageDetail);
+                return SystemAdminRepository.GetSystemAdmin(searchParameters);
             }
             catch (Exception ex)
             {

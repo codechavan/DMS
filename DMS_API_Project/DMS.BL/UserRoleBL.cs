@@ -36,7 +36,11 @@ namespace DMS.BL
             logger = new Logger("DMS.BL.SystemBL");
         }
 
-
+        /// <summary>
+        /// Create new userrole
+        /// </summary>
+        /// <param name="userRole">user role detail</param>
+        /// <returns></returns>
         public FunctionReturnStatus CreateUserRole(DmsUserRole userRole)
         {
             if (userRole == null)
@@ -95,7 +99,7 @@ namespace DMS.BL
             }
             DmsUserRoleSearchParameter searchParameters = new DmsUserRoleSearchParameter();
             searchParameters.RoleId = userRoleId;
-            var lstIserRoles = GetUserRole(searchParameters, null);
+            var lstIserRoles = GetUserRole(searchParameters);
             if (lstIserRoles != null && lstIserRoles.LstData != null)
             {
                 if (lstIserRoles.LstData.Count == 1)
@@ -106,11 +110,11 @@ namespace DMS.BL
             return null;
         }
 
-        public DmsUserRoleSearchData GetUserRole(DmsUserRoleSearchParameter searchParameters, PagingDetails pageDetail)
+        public DmsUserRoleSearchData GetUserRole(DmsUserRoleSearchParameter searchParameters)
         {
             try
             {
-                return UserRoleRepository.GetUserRole(searchParameters, pageDetail);
+                return UserRoleRepository.GetUserRole(searchParameters);
             }
             catch (Exception ex)
             {

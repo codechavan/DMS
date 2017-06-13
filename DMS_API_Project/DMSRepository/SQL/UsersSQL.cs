@@ -164,7 +164,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override DmsUserSearchData GetUser(DmsUserSearchParameter searchParameters, PagingDetails pageDetail)
+        public override DmsUserSearchData GetUser(DmsUserSearchParameter searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -174,21 +174,21 @@ namespace DMS.Repository.SQL
                 {
                     searchParameters = new DmsUserSearchParameter();
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_Users);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Users_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Users_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Users_Parameters.PageIndex, DbType.Int32, searchParameters.PageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Users_Parameters.PageSize, DbType.Int32, searchParameters.PageDetail.PageSize);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Users_Parameters.WhereCondition, DbType.String, GetUserSearchParameterString(searchParameters));
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Users_Parameters.OrderBy, DbType.String, GetUserOrderBy(pageDetail.OrderBy));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Users_Parameters.OrderBy, DbType.String, GetUserOrderBy(searchParameters.PageDetail.OrderBy));
 
                 DmsUserSearchData data = new DmsUserSearchData();
-                data.pageDetail = pageDetail;
+                data.pageDetail = searchParameters.PageDetail;
                 List<DmsUser> lstUsers = null;
                 using (IDataReader objReader = database.ExecuteReader(dbCommand))
                 {

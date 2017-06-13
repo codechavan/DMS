@@ -50,5 +50,26 @@ namespace DMS.API.Controllers
                 return null;
             }
         }
+
+
+        [HttpPost]
+        public FunctionReturnStatus UpdateSystemParameterValue(SystemParameterValue paramValue)
+        {
+            using (SystemParameterBL sysBL = new SystemParameterBL(WebConstants.DMSConnectionStringName))
+            {
+                paramValue.ModifiedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                return sysBL.UpdateSystemParameterValue(paramValue);
+            }
+        }
+
+        [HttpPost]
+        public IList<SystemParameter> GetSystemParameter(long systemParameterId)
+        {
+            using (SystemParameterBL sysBL = new SystemParameterBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetSystemParameter(systemParameterId);
+            }
+        }
+
     }
 }

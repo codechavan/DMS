@@ -15,5 +15,7 @@ namespace DMS.Model
         public string FullName { get; set; }
 
         public string EmailId { get; set; }
+
+        public PagingDetails PageDetail { get; set; }
     }
 }

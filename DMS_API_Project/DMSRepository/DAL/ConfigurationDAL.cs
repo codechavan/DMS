@@ -21,7 +21,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus UpdateConfigurationValue(SysConfiguration paramValue);
 
-        public abstract SysConfigurationSearchData GetConfigurations(ConfigurationSearchParameter searchParameters, PagingDetails pageDetail);
+        public abstract SysConfigurationSearchData GetConfigurations(ConfigurationSearchParameter searchParameters);
 
 
 

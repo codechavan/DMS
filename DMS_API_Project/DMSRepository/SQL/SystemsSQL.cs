@@ -118,7 +118,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override DmsSystemSearchData GetSystem(DmsSystemSearchParameters searchParameters, PagingDetails pageDetail)
+        public override DmsSystemSearchData GetSystem(DmsSystemSearchParameters searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -128,19 +128,19 @@ namespace DMS.Repository.SQL
                 {
                     searchParameters = new DmsSystemSearchParameters();
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
 
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_Systems);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Systems_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Systems_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Systems_Parameters.PageIndex, DbType.Int32, searchParameters.PageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Systems_Parameters.PageSize, DbType.Int32, searchParameters.PageDetail.PageSize);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Systems_Parameters.WhereCondition, DbType.String, GetSystemSearchParameterString(searchParameters));
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Systems_Parameters.OrderBy, DbType.String, GetSystemOrderBy(pageDetail.OrderBy));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Systems_Parameters.OrderBy, DbType.String, GetSystemOrderBy(searchParameters.PageDetail.OrderBy));
 
                 DmsSystemSearchData LstData = new DmsSystemSearchData();
                 List<DmsSystem> lstSystems = null;
@@ -156,7 +156,7 @@ namespace DMS.Repository.SQL
                     }
                 }
                 LstData.LstData = lstSystems;
-                LstData.PageDetail = pageDetail;
+                LstData.PageDetail = searchParameters.PageDetail;
 
                 return LstData;
             }

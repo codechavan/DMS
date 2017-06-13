@@ -18,5 +18,6 @@ namespace DMS.Model
 
         public string Description { get; set; }
 
+        public PagingDetails PageDetail { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus CreateUpdateSystemAdmin(SystemAdmin admin);
 
-        public abstract SystemAdminSearchData GetSystemAdmin(SystemAdminSearchParameter searchParameters, PagingDetails pageDetail);
+        public abstract SystemAdminSearchData GetSystemAdmin(SystemAdminSearchParameter searchParameters);
 
         public abstract FunctionReturnStatus Login(string username, string password);
 

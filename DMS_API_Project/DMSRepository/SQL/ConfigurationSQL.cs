@@ -70,7 +70,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override SysConfigurationSearchData GetConfigurations(ConfigurationSearchParameter searchParameters, PagingDetails pageDetail)
+        public override SysConfigurationSearchData GetConfigurations(ConfigurationSearchParameter searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -81,19 +81,19 @@ namespace DMS.Repository.SQL
                 {
                     searchParameters = new ConfigurationSearchParameter();
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
 
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_Configurations);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Configurations_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Configurations_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Configurations_Parameters.PageIndex, DbType.Int32, searchParameters.PageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Configurations_Parameters.PageSize, DbType.Int32, searchParameters.PageDetail.PageSize);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Configurations_Parameters.WhereCondition, DbType.String, GetConfigurationSearchParameterString(searchParameters));
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Configurations_Parameters.OrderBy, DbType.String, GetConfigurationsOrderBy(pageDetail.OrderBy));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Configurations_Parameters.OrderBy, DbType.String, GetConfigurationsOrderBy(searchParameters.PageDetail.OrderBy));
 
                 SysConfigurationSearchData LstData = new SysConfigurationSearchData();
                 List<SysConfiguration> lstConfiguration = null;
@@ -109,7 +109,7 @@ namespace DMS.Repository.SQL
                     }
                 }
                 LstData.LstData = lstConfiguration;
-                LstData.PageDetail = pageDetail;
+                LstData.PageDetail = searchParameters.PageDetail;
                 return LstData;
             }
             catch (Exception ex)

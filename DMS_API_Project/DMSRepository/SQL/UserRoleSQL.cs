@@ -71,7 +71,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override DmsUserRoleSearchData GetUserRole(DmsUserRoleSearchParameter searchParameters, PagingDetails pageDetail)
+        public override DmsUserRoleSearchData GetUserRole(DmsUserRoleSearchParameter searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -81,24 +81,24 @@ namespace DMS.Repository.SQL
                 {
                     searchParameters = new DmsUserRoleSearchParameter();
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_Userroles);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Userroles_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Userroles_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Userroles_Parameters.PageIndex, DbType.Int32, searchParameters.PageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Userroles_Parameters.PageSize, DbType.Int32, searchParameters.PageDetail.PageSize);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Userroles_Parameters.WhereCondition, DbType.String, GetUserRoleSearchParameterString(searchParameters));
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Userroles_Parameters.OrderBy, DbType.String, GetUserRoleOrderBy(pageDetail.OrderBy));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_Userroles_Parameters.OrderBy, DbType.String, GetUserRoleOrderBy(searchParameters.PageDetail.OrderBy));
 
                 DmsUserRoleSearchData LstData = new DmsUserRoleSearchData();
                 List<DmsUserRole> lstUserRoles = null;
                 using (IDataReader objReader = database.ExecuteReader(dbCommand))
                 {
-                    lstUserRoles = CreateUserRoleObjects(objReader); 
+                    lstUserRoles = CreateUserRoleObjects(objReader);
                     if (objReader.NextResult())
                     {
                         if (objReader.Read())
@@ -108,7 +108,7 @@ namespace DMS.Repository.SQL
                     }
                 }
                 LstData.LstData = lstUserRoles;
-                LstData.PageDetail = pageDetail;
+                LstData.PageDetail = searchParameters.PageDetail;
 
                 return LstData;
             }

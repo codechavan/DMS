@@ -30,24 +30,8 @@ namespace DMS.API.Controllers
         {
             using (SystemBL sysBL = new SystemBL(WebConstants.DMSConnectionStringName))
             {
-                return sysBL.GetSystem(null, null).LstData;
+                return sysBL.GetSystem(null).LstData;
             }
-            //List<DmsSystem> lstSys = new List<DmsSystem>();
-            //DmsSystem sys = new DmsSystem();
-            //sys.SystemName = "Test 1";
-            //sys.SystemId = 1;
-            //lstSys.Add(sys);
-            //sys = new DmsSystem();
-            //sys.SystemName = "Test 2";
-            //sys.SystemId = 2;
-            //lstSys.Add(sys);
-
-            //sys = new DmsSystem();
-            //sys.SystemName = "Test 3";
-            //sys.SystemId = 3;
-            //lstSys.Add(sys);
-
-            //return lstSys;
         }
 
         [HttpPost]
@@ -67,7 +51,7 @@ namespace DMS.API.Controllers
             dmsUser.FullName = newDmsSys.FullName;
             dmsUser.Password = newDmsSys.Password;
             dmsUser.EmailId = newDmsSys.EmailId;
-            
+
             userRole.RoleName = newDmsSys.RoleName;
             userRole.Description = newDmsSys.RoleDescription;
 
@@ -85,6 +69,68 @@ namespace DMS.API.Controllers
                 throw;
             }
             return result;
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus UpdateSystem(DmsSystem system)
+        {
+            if (system == null)
+            {
+                throw new ArgumentNullException("system");
+            }
+            system.ModifiedBy =long.Parse( RequestContext.Principal.Identity.Name);
+            FunctionReturnStatus result = null;
+            try
+            {
+                using (SystemBL systemBL = new SystemBL(WebConstants.DMSConnectionStringName))
+                {
+                    result = systemBL.UpdateDmsSystem(system);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+            return result;
+        }
+
+        [HttpPost]
+        public DmsSystemSearchData GetSystems(DmsSystemSearchParameters searchParameters)
+        {
+            if (searchParameters == null)
+            {
+                throw new ArgumentNullException("searchParameters");
+            }
+            try
+            {
+                using (SystemBL systemBL = new SystemBL(WebConstants.DMSConnectionStringName))
+                {
+                    return systemBL.GetSystem(searchParameters);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public DmsSystem GetSystem(long systemId)
+        {
+            try
+            {
+                using (SystemBL systemBL = new SystemBL(WebConstants.DMSConnectionStringName))
+                {
+                    return systemBL.GetSystem(systemId);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogEvent(ex.ToString(), LogLevel.Error);
+                throw;
+            }
         }
 
     }

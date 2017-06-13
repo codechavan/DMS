@@ -17,7 +17,7 @@ namespace DMS.API.Controllers
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentFileController" /> class.
+        /// Initializes a new instance of the <see cref="DocumentFilePropertiesController" /> class.
         /// </summary>
         public DocumentFilePropertiesController()
         {

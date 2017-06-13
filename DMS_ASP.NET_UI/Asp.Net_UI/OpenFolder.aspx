@@ -114,6 +114,7 @@
                 </div>
             </div>
         </div>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="modalFolder" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">

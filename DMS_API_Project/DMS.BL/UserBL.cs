@@ -129,7 +129,7 @@ namespace DMS.BL
                 }
                 DmsUserSearchParameter searchParameters = new DmsUserSearchParameter();
                 searchParameters.UserId = userId;
-                DmsUserSearchData lstData = GetUser(searchParameters, null);
+                DmsUserSearchData lstData = GetUser(searchParameters);
                 if (lstData != null && lstData.LstData != null)
                 {
                     if (lstData.LstData.Count == 1)
@@ -146,11 +146,11 @@ namespace DMS.BL
             }
         }
 
-        public DmsUserSearchData GetUser(DmsUserSearchParameter searchParameters, PagingDetails pageDetail)
+        public DmsUserSearchData GetUser(DmsUserSearchParameter searchParameters)
         {
             try
             {
-                return UserRepository.GetUser(searchParameters, pageDetail);
+                return UserRepository.GetUser(searchParameters);
             }
             catch (Exception ex)
             {

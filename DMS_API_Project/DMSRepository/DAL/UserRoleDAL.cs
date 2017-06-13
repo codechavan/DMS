@@ -20,7 +20,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus CreateUpdateUserRole(DmsUserRole userRole);
 
-        public abstract DmsUserRoleSearchData GetUserRole(DmsUserRoleSearchParameter searchParameters, PagingDetails pageDetail);
+        public abstract DmsUserRoleSearchData GetUserRole(DmsUserRoleSearchParameter searchParameters);
 
         protected string GetUserRoleSearchParameterString(DmsUserRoleSearchParameter searchParameters)
         {

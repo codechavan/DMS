@@ -11,6 +11,26 @@ namespace DMS.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                
+            }
+        }
+
+        private void LoadUserList()
+        {
+        }
+        private void ViewUser(long userId)
+        {
+        }
+
+        protected void btnAddUser_ServerClick(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCancelSave_ServerClick(object sender, EventArgs e)
+        {
 
         }
     }

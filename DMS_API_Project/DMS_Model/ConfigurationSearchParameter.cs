@@ -9,5 +9,7 @@ namespace DMS.Model
     public class ConfigurationSearchParameter
     {
         public string ConfigurationCode { get; set; }
+
+        public PagingDetails PageDetail { get; set; }
     }
 }

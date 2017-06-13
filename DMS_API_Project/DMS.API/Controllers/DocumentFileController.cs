@@ -28,8 +28,10 @@ namespace DMS.API.Controllers
         [HttpPost]
         public FunctionReturnStatus UploadFile(DocumentFile file)
         {
+
             using (DocumentFileBL sysBL = new DocumentFileBL(WebConstants.DMSConnectionStringName))
             {
+                file.CreatedBy = long.Parse(RequestContext.Principal.Identity.Name);
                 return sysBL.UploadFile(file);
             }
         }

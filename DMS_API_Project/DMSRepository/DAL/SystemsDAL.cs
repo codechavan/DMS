@@ -22,7 +22,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus UpdateDmsSystem(DmsSystem system);
 
-        public abstract DmsSystemSearchData GetSystem(DmsSystemSearchParameters searchParameters, PagingDetails pageDetail);
+        public abstract DmsSystemSearchData GetSystem(DmsSystemSearchParameters searchParameters);
 
 
         protected string GetSystemSearchParameterString(DmsSystemSearchParameters searchParameters)

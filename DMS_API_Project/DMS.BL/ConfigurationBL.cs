@@ -62,28 +62,13 @@ namespace DMS.BL
             return ConfigurationRepository.UpdateConfigurationValue(configuration);
         }
 
-
-
-        public SysConfigurationSearchData GetConfiguration()
-        {
-            try
-            {
-                return GetConfiguration(null, null);
-            }
-            catch (Exception ex)
-            {
-                logger.LogEvent(ex.ToString(), LogLevel.Error);
-                throw;
-            }
-        }
-        
         public SysConfiguration GetConfiguration(string configurationCode)
         {
             try
             {
                 ConfigurationSearchParameter searchParameters = new ConfigurationSearchParameter();
                 searchParameters.ConfigurationCode = configurationCode;
-                var lstConfiguration = GetConfiguration(searchParameters, null);
+                var lstConfiguration = GetConfiguration(searchParameters);
                 if (lstConfiguration != null && lstConfiguration.LstData != null)
                 {
                     if (lstConfiguration.LstData.Count == 1)
@@ -100,11 +85,11 @@ namespace DMS.BL
             }
         }
 
-        public SysConfigurationSearchData GetConfiguration(ConfigurationSearchParameter searchParameters, PagingDetails pageDetail)
+        public SysConfigurationSearchData GetConfiguration(ConfigurationSearchParameter searchParameters)
         {
             try
             {
-                return ConfigurationRepository.GetConfigurations(searchParameters, pageDetail);
+                return ConfigurationRepository.GetConfigurations(searchParameters);
             }
             catch (Exception ex)
             {
