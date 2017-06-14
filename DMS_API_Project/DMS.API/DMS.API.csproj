@@ -183,6 +183,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\DMSConfigurationController.cs" />
     <Compile Include="Controllers\SystemAdminController.cs" />
+    <Compile Include="Controllers\DocumentAccessController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\DocumentFilePropertiesController.cs" />
     <Compile Include="Controllers\DocumentFileController.cs" />

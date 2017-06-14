@@ -35,6 +35,26 @@ namespace DMS.API.Controllers
         }
 
         [HttpPost]
+        public FunctionReturnStatus CreateDocumentPropertiesNames(DocumentPropertiesNames docPropertiesNames)
+        {
+            using (DocumentPropertiesNamesBL sysBL = new DocumentPropertiesNamesBL(WebConstants.DMSConnectionStringName))
+            {
+                docPropertiesNames.CreatedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                return sysBL.CreateUpdatePropertiesNames(docPropertiesNames);
+            }
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus UpdateDocumentPropertiesNames(DocumentPropertiesNames docPropertiesNames)
+        {
+            using (DocumentPropertiesNamesBL sysBL = new DocumentPropertiesNamesBL(WebConstants.DMSConnectionStringName))
+            {
+                docPropertiesNames.ModifiedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                return sysBL.CreateUpdatePropertiesNames(docPropertiesNames);
+            }
+        }
+
+        [HttpPost]
         public DocumentProperties GetDocumentProperties(DocumentPropertiesSearchParameter searchParameters)
         {
             using (DocumentPropertiesBL sysBL = new DocumentPropertiesBL(WebConstants.DMSConnectionStringName))

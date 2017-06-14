@@ -48,7 +48,36 @@ namespace DMS.API.Controllers
         {
             using (DocumentFolderBL sysBL = new DocumentFolderBL(WebConstants.DMSConnectionStringName))
             {
+                folder.CreatedBy = long.Parse(RequestContext.Principal.Identity.Name);
                 return sysBL.CreateFolder(folder);
+            }
+        }
+
+        [HttpPost]
+        public FunctionReturnStatus UpdateFolder(DocumentFolder folder)
+        {
+            using (DocumentFolderBL sysBL = new DocumentFolderBL(WebConstants.DMSConnectionStringName))
+            {
+                folder.ModifiedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                return sysBL.UpdateFolder(folder);
+            }
+        }
+
+        [HttpPost]
+        public DocumentFolderSearchData GetFolder(long parentFolderId)
+        {
+            using (DocumentFolderBL sysBL = new DocumentFolderBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetFolder(parentFolderId);
+            }
+        }
+
+        [HttpPost]
+        public DocumentFolderSearchData GetFolders(DocumentFolderSearchParameter searchParameter)
+        {
+            using (DocumentFolderBL sysBL = new DocumentFolderBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetFolders(searchParameter);
             }
         }
 

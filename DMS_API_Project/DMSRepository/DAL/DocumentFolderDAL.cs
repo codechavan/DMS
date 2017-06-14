@@ -22,7 +22,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus CreateUpdateFolder(DocumentFolder folder);
 
-        public abstract DocumentFolderSearchData GetFolders(DocumentFolderSearchParameter searchParameters, PagingDetails pageDetail);
+        public abstract DocumentFolderSearchData GetFolders(DocumentFolderSearchParameter searchParameters);
 
         public abstract DocumentSearchData GetDocumentObjectList(DocumentSearchParameter searchParameters);
 

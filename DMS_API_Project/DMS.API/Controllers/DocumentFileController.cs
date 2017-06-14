@@ -28,11 +28,53 @@ namespace DMS.API.Controllers
         [HttpPost]
         public FunctionReturnStatus UploadFile(DocumentFile file)
         {
-
             using (DocumentFileBL sysBL = new DocumentFileBL(WebConstants.DMSConnectionStringName))
             {
-                file.CreatedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                if (file.FileId < 1)
+                {
+                    file.CreatedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                }
+                else
+                {
+                    file.ModifiedBy = long.Parse(RequestContext.Principal.Identity.Name);
+                }
                 return sysBL.UploadFile(file);
+            }
+        }
+
+        [HttpPost]
+        public DocumentFileSearchData GetFiles(DocumentFileSearchParameter searchParameters)
+        {
+            using (DocumentFileBL sysBL = new DocumentFileBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetFiles(searchParameters);
+            }
+        }
+
+        [HttpPost]
+        public DocumentFile GetFile(long documentId)
+        {
+            using (DocumentFileBL sysBL = new DocumentFileBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetFiles(documentId);
+            }
+        }
+
+        [HttpPost]
+        public DocumentProperties GetDocumentFileProperties(long documentId)
+        {
+            using (DocumentFileBL sysBL = new DocumentFileBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetDocumentFileProperties(documentId);
+            }
+        }
+
+        [HttpPost]
+        public IList<DocumentFileHistory> GetFileHistory(long documentId)
+        {
+            using (DocumentFileBL sysBL = new DocumentFileBL(WebConstants.DMSConnectionStringName))
+            {
+                return sysBL.GetFileHistory(documentId);
             }
         }
 

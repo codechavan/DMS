@@ -78,7 +78,7 @@ namespace DMS.BL
             {
                 DocumentFileSearchParameter searchParameters = new DocumentFileSearchParameter();
                 searchParameters.FileId = documentId;
-                var lstConfiguration = GetFiles(searchParameters, null);
+                var lstConfiguration = GetFiles(searchParameters);
                 if (lstConfiguration != null && lstConfiguration.LstData != null)
                 {
                     if (lstConfiguration.LstData.Count == 1)
@@ -95,11 +95,11 @@ namespace DMS.BL
             }
         }
 
-        public DocumentFileSearchData GetFiles(DocumentFileSearchParameter searchParameters, PagingDetails pageDetail)
+        public DocumentFileSearchData GetFiles(DocumentFileSearchParameter searchParameters)
         {
             try
             {
-                return DocumentFileRepository.GetFiles(searchParameters, pageDetail);
+                return DocumentFileRepository.GetFiles(searchParameters);
             }
             catch (Exception ex)
             {

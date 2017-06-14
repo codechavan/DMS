@@ -14,5 +14,6 @@ namespace DMS.Model
         public string FileName { get; set; }
         public string FolderName { get; set; }
         public bool? IsDeleted { get; set; }
+        public PagingDetails PageDetail { get; set; }
     }
 }

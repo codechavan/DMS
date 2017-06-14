@@ -90,7 +90,7 @@ namespace DMS.BL
             {
                 DocumentFolderSearchParameter searchParameters = new DocumentFolderSearchParameter();
                 searchParameters.SystemId = systemId;
-                return GetFolders(searchParameters, null);
+                return GetFolders(searchParameters);
             }
             catch (Exception ex)
             {
@@ -105,7 +105,7 @@ namespace DMS.BL
             {
                 DocumentFolderSearchParameter searchParameters = new DocumentFolderSearchParameter();
                 searchParameters.FolderId = parentFolderId;
-                return GetFolders(searchParameters, null);
+                return GetFolders(searchParameters);
             }
             catch (Exception ex)
             {
@@ -114,11 +114,11 @@ namespace DMS.BL
             }
         }
 
-        public DocumentFolderSearchData GetFolders(DocumentFolderSearchParameter searchParameters, PagingDetails pageDetail)
+        public DocumentFolderSearchData GetFolders(DocumentFolderSearchParameter searchParameters)
         {
             try
             {
-                return DocumentFolderRepository.GetFolders(searchParameters, pageDetail);
+                return DocumentFolderRepository.GetFolders(searchParameters);
             }
             catch (Exception ex)
             {

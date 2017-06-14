@@ -42,21 +42,21 @@
 --	c. Function			- DONE			- DONE --no need
 
 --7. Document Properties Name Configuration
---	a. Add/Update		- DONE			- DONE
---	b. List				- DONE			- DONE
+--	a. Add/Update		- DONE			- DONE			-DONE
+--	b. List				- DONE			- DONE			-DONE
 
 --8. Document Folder(Pending - Add logic for check rights)
 --	a. Add				- DONE			- DONE			-DONE
---	b. Edit				- DONE			- DONE
---	c. List				- DONE			- DONE
+--	b. Edit				- DONE			- DONE			-DONE
+--	c. List				- DONE			- DONE			-DONE
 --	d. Delete			- PENDING
 --	e. DirectoryPath	- PENDING(Function)
 
 --9. Document Files(Pending - Add logic for check rights)
 --	a. Add				- DONE			- DONE			-DONE
---	b. Edit				- DONE			- DONE
---	c. List				- DONE			- DONE
---	d. History			- DONE			- DONE
+--	b. Edit				- DONE			- DONE			-DONE
+--	c. List				- DONE			- DONE			-DONE
+--	d. History			- DONE			- DONE			-DONE
 --	d. Delete			- PENDING
 --	d. View				- PENDING
 
@@ -66,9 +66,9 @@
 --	c. GET				- DONE			- DONE			-DONE
 
 --11. UserRole Mapping to Folder & Files
---	a. Assign Rights to file/folder		- DONE	- DONE
---	c. Remove rights from file/folder	- DONE	- DONE
---	e. Has access						- DONE	- DONE
+--	a. Assign Rights to file/folder		- DONE	- DONE	-DONE
+--	c. Remove rights from file/folder	- DONE	- DONE	-DONE
+--	e. Has access						- DONE	- DONE	-Pending
 
 --12. Miscellinous [For Authentication]  -- Not required currently, low priority
 --	a. Store Session Token in DB [SessionID, Token, UserID, Token, CreatedByIP, CreatedOn, LastAccessOn, IsActive, LogoutOn, LogoutRemark]

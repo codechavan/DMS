@@ -13,5 +13,6 @@ namespace DMS.Model
         public string FolderName { get; set; }
         public long ParentFolderId { get; set; }
         public bool IsDelete { get; set; }
+        public PagingDetails PageDetail { get; set; }
     }
 }

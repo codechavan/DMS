@@ -21,7 +21,7 @@ namespace DMS.Repository.DAL
 
         public abstract FunctionReturnStatus CreateUpdateFileWithAttribute(DocumentFile file, DocumentProperties properties);
 
-        public abstract DocumentFileSearchData GetFiles(DocumentFileSearchParameter searchParameters, PagingDetails pageDetail);
+        public abstract DocumentFileSearchData GetFiles(DocumentFileSearchParameter searchParameters);
 
         public abstract DocumentProperties GetFilesProperties(long documentId);
 

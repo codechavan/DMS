@@ -108,7 +108,7 @@ namespace DMS.Repository.SQL
             }
         }
 
-        public override DocumentFileSearchData GetFiles(DocumentFileSearchParameter searchParameters, PagingDetails pageDetail)
+        public override DocumentFileSearchData GetFiles(DocumentFileSearchParameter searchParameters)
         {
             Database database;
             DbCommand dbCommand;
@@ -119,19 +119,19 @@ namespace DMS.Repository.SQL
                 {
                     searchParameters = new DocumentFileSearchParameter();
                 }
-                if (pageDetail == null)
+                if (searchParameters.PageDetail == null)
                 {
-                    pageDetail = new PagingDetails();
+                    searchParameters.PageDetail = new PagingDetails();
                 }
 
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 database = factory.Create(ConnectionStringName);
                 dbCommand = database.GetStoredProcCommand(StoreProcedures.dbo.usp_Get_DocumentFiles);
 
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFiles_Parameters.PageIndex, DbType.Int32, pageDetail.PageIndex);
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFiles_Parameters.PageSize, DbType.Int32, pageDetail.PageSize);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFiles_Parameters.PageIndex, DbType.Int32, searchParameters.PageDetail.PageIndex);
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFiles_Parameters.PageSize, DbType.Int32, searchParameters.PageDetail.PageSize);
                 database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFiles_Parameters.WhereCondition, DbType.String, GetDocumentFileParameterString(searchParameters));
-                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFiles_Parameters.OrderBy, DbType.String, GetDocumentFileOrderBy(pageDetail.OrderBy));
+                database.AddInParameter(dbCommand, StoreProcedures.dbo.usp_Get_DocumentFiles_Parameters.OrderBy, DbType.String, GetDocumentFileOrderBy(searchParameters.PageDetail.OrderBy));
 
                 DocumentFileSearchData LstData = new DocumentFileSearchData();
                 List<DocumentFile> lstDocuments = null;
@@ -147,7 +147,7 @@ namespace DMS.Repository.SQL
                     }
                 }
                 LstData.LstData = lstDocuments;
-                LstData.PageDetail = pageDetail;
+                LstData.PageDetail = searchParameters.PageDetail;
                 return LstData;
             }
             catch (Exception ex)
