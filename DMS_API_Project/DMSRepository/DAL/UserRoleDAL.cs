@@ -124,9 +124,9 @@ namespace DMS.Repository.DAL
                 role.CreatedBy = objReader[Views.DmsUserRoles.UserRoleCreatedBy] != DBNull.Value ? Convert.ToInt64(objReader[Views.DmsUserRoles.UserRoleCreatedBy]) : 0;
                 role.ModifiedBy = objReader[Views.DmsUserRoles.UserRoleModifiedBy] != DBNull.Value ? Convert.ToInt64(objReader[Views.DmsUserRoles.UserRoleModifiedBy]) : 0;
                 role.ModifiedOn = null;
-                if (objReader[Views.DmsUserRoles.UserRoleModifiedBy] != DBNull.Value)
+                if (objReader[Views.DmsUserRoles.UserRoleModifiedOn] != DBNull.Value)
                 {
-                    role.ModifiedOn = Convert.ToDateTime(objReader[Views.DmsUserRoles.UserRoleModifiedBy]);
+                    role.ModifiedOn = Convert.ToDateTime(objReader[Views.DmsUserRoles.UserRoleModifiedOn]);
                 }
                 lstRoles.Add(role);
             }
